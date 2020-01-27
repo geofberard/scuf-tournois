@@ -1,16 +1,16 @@
 var webpack = require('webpack');
 
 module.exports = {
-    entry: [__dirname + "/app/main.tsx"],
+    entry: [__dirname + "/src/main.tsx"],
     output: {
-        path: __dirname + '/public/',
+        path: __dirname,
         filename: 'index.js'
     },
     devServer: {
         inline: true,
-        contentBase: __dirname + '/public/',
+        contentBase: __dirname,
         compress: true,
-        port: 8091
+        port: 8090
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"]
@@ -23,28 +23,6 @@ module.exports = {
                     loader: "awesome-typescript-loader"
                 },
                 exclude: /node_modules/,
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    {
-                        loader: "postcss-loader",
-                    },
-                    {
-                        loader: "resolve-url-loader",
-                    },
-                    "sass-loader",
-                ],
-            },
-            {
-                test: /\.css/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "postcss-loader"
-                ]
             }
         ]
     },
