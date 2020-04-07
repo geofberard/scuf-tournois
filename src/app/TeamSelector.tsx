@@ -4,6 +4,7 @@ import {Team} from "./data/Team";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import {sortByName} from "./data/TeamUtils";
 
 type TeamSetter = (team: Team) => void;
 
@@ -24,7 +25,7 @@ export const TeamSelector: FC<TeamSelectorProps> = ({currentTeam, teams, onChang
         >
             <option aria-label="None" value=""/>
             {teams
-                .sort((teamA, teamB) => ("" +teamA.label).localeCompare(teamB.label))
+                .sort(sortByName)
                 .map(team => <option value={team.id}>{team.label}</option>)}
         </Select>
     </FormControl>

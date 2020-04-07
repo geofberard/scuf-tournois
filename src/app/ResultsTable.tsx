@@ -9,6 +9,7 @@ import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {Team} from "./data/Team";
+import {sortByScore} from "./data/TeamUtils";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -25,19 +26,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const sortTeam = (teamA: Team, teamB: Team) => {
-    if(teamA.stats.score === teamB.stats.score) {
-        return teamA.stats.pointsDiff < teamB.stats.pointsDiff ? 1 : -1;
-    }
-    return teamA.stats.score < teamB.stats.score ? 1 : -1;
-};
-
-interface ResultTableProps {
+interface ResultsTableProps {
     teams: Team[];
     focus?: Team;
 }
 
-export const ResultsTable: FC<ResultTableProps> = ({teams, focus}) => {
+export const ResultsTable: FC<ResultsTableProps> = ({teams, focus}) => {
     const classes = useStyles();
 
     return (
@@ -59,7 +53,7 @@ export const ResultsTable: FC<ResultTableProps> = ({teams, focus}) => {
                 </TableHead>
                 <TableBody>
                     {teams
-                        .sort(sortTeam)
+                        .sort(sortByScore)
                         .map((row, index) => (
                         <TableRow key={row.id} className={focus && row.id === focus.id ? classes.focused : null}>
                             <TableCell align="right">{index + 1}</TableCell>

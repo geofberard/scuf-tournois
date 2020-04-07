@@ -7,6 +7,7 @@ import {Team} from "./data/Team";
 import {Navigation} from "./Navigation";
 import {LocationMap, Results, Rules, Schedule, Teams} from "./data/Pages";
 import {Page} from "./data/Page";
+import {TeamsTable} from "./TeamsTable";
 
 const driveKey = "1qJoXQP4ECRrhydxb76WmtPMQbjDDe4ccM-xtJZ3ZNPU";
 
@@ -21,6 +22,7 @@ export const RootApp: FC = () => {
         <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>
             <TeamSelector currentTeam={currentTeam} teams={data.teams} onChange={setCurrentTeam}/>
             {(currentPage === Results) && <ResultsTable teams={data.teams} focus={currentTeam}/>}
+            {(currentPage === Teams) && <TeamsTable teams={data.teams} focus={currentTeam}/>}
         </Navigation>
     );
 };
