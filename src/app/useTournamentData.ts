@@ -132,6 +132,14 @@ export const useTournamentData: (driveKey: string) => Tournament = (driveKey) =>
             id: spreadSheet.id,
             label: spreadSheet.label,
             stats: computeStats(spreadSheet, gamesData)
+        })),
+        games: gamesData.map(game => ({
+            id: "" + game.time + game.teamA + game.teamB,
+            time: game.time,
+            court: game.court,
+            teamA: game.teamA,
+            teamB: game.teamB,
+            referee: "",
         }))
-    };
+    } as Tournament;
 };

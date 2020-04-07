@@ -42,10 +42,10 @@ export const TeamsTable: FC<TeamsTableProps> = ({teams, focus}) => {
                     <TableBody>
                         {teams
                             .sort(sortByName)
-                            .map((row, index) => (
-                                <TableRow key={row.id}
-                                          className={focus && row.id === focus.id ? classes.focused : null}>
-                                    <TableCell component="th" scope="row">{row.label}</TableCell>
+                            .map((team, index) => (
+                                <TableRow key={team.id}
+                                          className={focus && team.id === focus.id ? classes.focused : null}>
+                                    <TableCell component="th" scope="row">{team.label}</TableCell>
                                 </TableRow>
                             ))}
                     </TableBody>

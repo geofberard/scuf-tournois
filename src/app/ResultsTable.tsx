@@ -54,18 +54,18 @@ export const ResultsTable: FC<ResultsTableProps> = ({teams, focus}) => {
                 <TableBody>
                     {teams
                         .sort(sortByScore)
-                        .map((row, index) => (
-                        <TableRow key={row.id} className={focus && row.id === focus.id ? classes.focused : null}>
+                        .map((team, index) => (
+                        <TableRow key={team.id} className={focus && team.id === focus.id ? classes.focused : null}>
                             <TableCell align="right">{index + 1}</TableCell>
-                            <TableCell component="th" scope="row">{row.label}</TableCell>
-                            <TableCell align="right">{row.stats.score}</TableCell>
-                            <TableCell align="right">{row.stats.won}</TableCell>
-                            <TableCell align="right">{row.stats.drawn}</TableCell>
-                            <TableCell align="right">{row.stats.lost}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{row.stats.played}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{row.stats.pointsFor}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{row.stats.pointsAgainst}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{row.stats.pointsDiff}</TableCell>
+                            <TableCell component="th" scope="row">{team.label}</TableCell>
+                            <TableCell align="right">{team.stats.score}</TableCell>
+                            <TableCell align="right">{team.stats.won}</TableCell>
+                            <TableCell align="right">{team.stats.drawn}</TableCell>
+                            <TableCell align="right">{team.stats.lost}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{team.stats.played}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{team.stats.pointsFor}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{team.stats.pointsAgainst}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{team.stats.pointsDiff}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
