@@ -1,6 +1,6 @@
 import {Stats} from "./Stats";
-import {Team} from "./Team";
-import {Game} from "./Game";
+import {Team} from "../team/Team";
+import {Game} from "../game/Game";
 
 enum GameIssue {
     VICTORY = 3, DEFEAT = 1, DRAWN = 0

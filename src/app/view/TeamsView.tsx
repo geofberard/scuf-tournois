@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
-import {sortByName} from "../data/TeamUtils";
+import {sortByName} from "../data/team/TeamUtils";
 import {Container} from "@material-ui/core";
 import {TournamentView} from "./TournamentView";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     focused: {
-        backgroundColor: theme.palette.grey["200"],
+        backgroundColor: theme.palette.grey["100"],
     },
 }));
 

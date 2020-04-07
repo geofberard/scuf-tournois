@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Team} from "./data/Team";
+import {Team} from "./data/team/Team";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import {sortByName} from "./data/TeamUtils";
+import {sortByName} from "./data/team/TeamUtils";
 
 type TeamSetter = (team: Team) => void;
 

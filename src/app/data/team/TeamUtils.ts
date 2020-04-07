@@ -1,5 +1,5 @@
 import {Team} from "./Team";
-import {Stats} from "./Stats";
+import {Stats} from "../stats/Stats";
 
 export const sortByName = (teamA: Team, teamB: Team) => ("" +teamA.label).localeCompare(teamB.label);
 
@@ -9,3 +9,5 @@ export const sortByScore = (teamA: Team & Stats, teamB: Team & Stats) => {
     }
     return teamA.score < teamB.score ? 1 : -1;
 };
+
+export const parseTeamId = (id: string, teams: Team[]) => teams.find(team => team.id === id);

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Tournament} from "./data/Tournament";
-import {Team} from "./data/Team";
-import {Game} from "./data/Game";
+import {Team} from "./data/team/Team";
+import {Game} from "./data/game/Game";
 
 let flag = true;
 

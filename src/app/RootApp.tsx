@@ -3,7 +3,7 @@ import {FC, useState} from 'react';
 import {useTournamentData} from "./useTournamentData";
 import {ResultsView} from "./view/ResultsView";
 import {TeamSelector} from "./TeamSelector";
-import {Team} from "./data/Team";
+import {Team} from "./data/team/Team";
 import {Navigation} from "./Navigation";
 import {LocationMap, Results, Rules, Schedule, Teams} from "./data/navigation/Pages";
 import {Page} from "./data/navigation/Page";

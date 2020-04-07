@@ -7,11 +7,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
-import {sortByScore} from "../data/TeamUtils";
+import {sortByScore} from "../data/team/TeamUtils";
 import {TournamentView} from "./TournamentView";
-import {computeStats} from "../data/StatsUtils";
-import {Stats} from "../data/Stats";
-import {Team} from "../data/Team";
+import {computeStats} from "../data/stats/StatsUtils";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -19,12 +17,11 @@ const useStyles = makeStyles((theme) => ({
     },
 
     focused: {
-        backgroundColor: theme.palette.grey["200"],
+        backgroundColor: theme.palette.grey["100"],
     },
 
     reduced: {
         color: theme.palette.grey["600"],
-        // fontWeight: 'bold',
     }
 }));
 

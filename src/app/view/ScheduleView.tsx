@@ -8,15 +8,28 @@ import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
+import {filterTeam, sortByDate} from "../data/game/GameUtils";
+import {parseTeamId} from "../data/team/TeamUtils";
 
 const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 650,
     },
+
+    focused: {
+        backgroundColor: theme.palette.grey["100"],
+    },
 }));
 
-export const ScheduleView: TournamentView = ({tournament}) => {
+export const ScheduleView: TournamentView = ({tournament, currentTeam}) => {
     const classes = useStyles();
+
+    const TeamCell = ({teamId}: {teamId:string}) => (
+        <TableCell component="th" scope="row"
+                   className={currentTeam && teamId === currentTeam.id ? classes.focused : null}>
+            {parseTeamId(teamId, tournament.teams).label}
+        </TableCell>
+    );
 
     return (
         <TableContainer component={Paper}>
@@ -32,13 +45,15 @@ export const ScheduleView: TournamentView = ({tournament}) => {
                 </TableHead>
                 <TableBody>
                     {tournament.games
+                        .sort(sortByDate)
+                        .filter(filterTeam(currentTeam))
                         .map((game, index) => (
                             <TableRow key={game.id}>
                                 <TableCell component="th" scope="row">{game.time.toLocaleTimeString()}</TableCell>
                                 <TableCell component="th" scope="row">{game.court}</TableCell>
-                                <TableCell component="th" scope="row">{game.teamA}</TableCell>
-                                <TableCell component="th" scope="row">{game.teamB}</TableCell>
-                                <TableCell component="th" scope="row">{game.referee}</TableCell>
+                                <TeamCell teamId={game.teamA}/>
+                                <TeamCell teamId={game.teamB}/>
+                                <TeamCell teamId={game.referee}/>
                             </TableRow>
                         ))}
                 </TableBody>
