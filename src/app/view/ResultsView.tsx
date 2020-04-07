@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {FC} from 'react';
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -8,8 +7,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
-import {Team} from "./data/Team";
-import {sortByScore} from "./data/TeamUtils";
+import {sortByScore} from "../data/TeamUtils";
+import {TournamentView} from "./TournamentView";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -26,12 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-interface ResultsTableProps {
-    teams: Team[];
-    focus?: Team;
-}
-
-export const ResultsTable: FC<ResultsTableProps> = ({teams, focus}) => {
+export const ResultsView: TournamentView = ({tournament, currentTeam}) => {
     const classes = useStyles();
 
     return (
@@ -52,22 +46,24 @@ export const ResultsTable: FC<ResultsTableProps> = ({teams, focus}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {teams
+                    {tournament.teams
                         .sort(sortByScore)
                         .map((team, index) => (
-                        <TableRow key={team.id} className={focus && team.id === focus.id ? classes.focused : null}>
-                            <TableCell align="right">{index + 1}</TableCell>
-                            <TableCell component="th" scope="row">{team.label}</TableCell>
-                            <TableCell align="right">{team.stats.score}</TableCell>
-                            <TableCell align="right">{team.stats.won}</TableCell>
-                            <TableCell align="right">{team.stats.drawn}</TableCell>
-                            <TableCell align="right">{team.stats.lost}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{team.stats.played}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{team.stats.pointsFor}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{team.stats.pointsAgainst}</TableCell>
-                            <TableCell align="right" className={classes.reduced}>{team.stats.pointsDiff}</TableCell>
-                        </TableRow>
-                    ))}
+                            <TableRow key={team.id}
+                                      className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
+                                <TableCell align="right">{index + 1}</TableCell>
+                                <TableCell component="th" scope="row">{team.label}</TableCell>
+                                <TableCell align="right">{team.stats.score}</TableCell>
+                                <TableCell align="right">{team.stats.won}</TableCell>
+                                <TableCell align="right">{team.stats.drawn}</TableCell>
+                                <TableCell align="right">{team.stats.lost}</TableCell>
+                                <TableCell align="right" className={classes.reduced}>{team.stats.played}</TableCell>
+                                <TableCell align="right" className={classes.reduced}>{team.stats.pointsFor}</TableCell>
+                                <TableCell align="right"
+                                           className={classes.reduced}>{team.stats.pointsAgainst}</TableCell>
+                                <TableCell align="right" className={classes.reduced}>{team.stats.pointsDiff}</TableCell>
+                            </TableRow>
+                        ))}
                 </TableBody>
             </Table>
         </TableContainer>

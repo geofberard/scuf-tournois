@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {FC} from 'react';
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -8,9 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
-import {Team} from "./data/Team";
-import {sortByScore} from "./data/TeamUtils";
-import {Game} from "./data/Game";
+import {TournamentView} from "./TournamentView";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -18,12 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-interface ScheduleViewProps {
-    games: Game[];
-    focus?: Team;
-}
-
-export const ScheduleView: FC<ScheduleViewProps> = ({games, focus}) => {
+export const ScheduleView: TournamentView = ({tournament}) => {
     const classes = useStyles();
 
     return (
@@ -39,16 +31,16 @@ export const ScheduleView: FC<ScheduleViewProps> = ({games, focus}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {games
+                    {tournament.games
                         .map((game, index) => (
-                        <TableRow key={game.id}>
-                            <TableCell component="th" scope="row">{game.time.toLocaleTimeString()}</TableCell>
-                            <TableCell component="th" scope="row">{game.court}</TableCell>
-                            <TableCell component="th" scope="row">{game.teamA}</TableCell>
-                            <TableCell component="th" scope="row">{game.teamB}</TableCell>
-                            <TableCell component="th" scope="row">{game.referee}</TableCell>
-                        </TableRow>
-                    ))}
+                            <TableRow key={game.id}>
+                                <TableCell component="th" scope="row">{game.time.toLocaleTimeString()}</TableCell>
+                                <TableCell component="th" scope="row">{game.court}</TableCell>
+                                <TableCell component="th" scope="row">{game.teamA}</TableCell>
+                                <TableCell component="th" scope="row">{game.teamB}</TableCell>
+                                <TableCell component="th" scope="row">{game.referee}</TableCell>
+                            </TableRow>
+                        ))}
                 </TableBody>
             </Table>
         </TableContainer>

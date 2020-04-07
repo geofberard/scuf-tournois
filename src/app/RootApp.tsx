@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
 import {useTournamentData} from "./useTournamentData";
-import {ResultsTable} from "./ResultsTable";
+import {ResultsView} from "./view/ResultsView";
 import {TeamSelector} from "./TeamSelector";
 import {Team} from "./data/Team";
 import {Navigation} from "./Navigation";
 import {LocationMap, Results, Rules, Schedule, Teams} from "./data/Pages";
 import {Page} from "./data/Page";
-import {TeamsTable} from "./TeamsTable";
-import {ScheduleView} from "./ScheduleView";
+import {TeamsView} from "./view/TeamsView";
+import {ScheduleView} from "./view/ScheduleView";
 
 const driveKey = "1qJoXQP4ECRrhydxb76WmtPMQbjDDe4ccM-xtJZ3ZNPU";
 
@@ -24,9 +24,9 @@ export const RootApp: FC = () => {
     return !data ? <>"Wait ...."</> : (
         <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>
             <TeamSelector currentTeam={currentTeam} teams={data.teams} onChange={setCurrentTeam}/>
-            {(currentPage === Results) && <ResultsTable teams={data.teams} focus={currentTeam}/>}
-            {(currentPage === Schedule) && <ScheduleView games={data.games} focus={currentTeam}/>}
-            {(currentPage === Teams) && <TeamsTable teams={data.teams} focus={currentTeam}/>}
+            {(currentPage === Results) && <ResultsView tournament={data} currentTeam={currentTeam}/>}
+            {(currentPage === Schedule) && <ScheduleView tournament={data} currentTeam={currentTeam}/>}
+            {(currentPage === Teams) && <TeamsView tournament={data} currentTeam={currentTeam}/>}
         </Navigation>
     );
 };

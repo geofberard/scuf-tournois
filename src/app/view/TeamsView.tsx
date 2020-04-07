@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {FC} from 'react';
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -8,9 +7,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
-import {Team} from "./data/Team";
-import {sortByName} from "./data/TeamUtils";
+import {sortByName} from "../data/TeamUtils";
 import {Container} from "@material-ui/core";
+import {TournamentView} from "./TournamentView";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -22,12 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-interface TeamsTableProps {
-    teams: Team[];
-    focus?: Team;
-}
-
-export const TeamsTable: FC<TeamsTableProps> = ({teams, focus}) => {
+export const TeamsView: TournamentView = ({tournament, currentTeam}) => {
     const classes = useStyles();
 
     return (
@@ -40,11 +34,11 @@ export const TeamsTable: FC<TeamsTableProps> = ({teams, focus}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {teams
+                        {tournament.teams
                             .sort(sortByName)
                             .map((team, index) => (
                                 <TableRow key={team.id}
-                                          className={focus && team.id === focus.id ? classes.focused : null}>
+                                          className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
                                     <TableCell component="th" scope="row">{team.label}</TableCell>
                                 </TableRow>
                             ))}
