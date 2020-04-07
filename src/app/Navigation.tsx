@@ -14,9 +14,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
-import {LocationMap, Results, Rules, Schedule, Teams} from "./data/Pages";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {Page} from "./data/Page";
+import {Page} from "./data/navigation/Page";
 
 const drawerWidth = 240;
 
@@ -112,7 +111,6 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">
-                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Hidden smUp implementation="css">
                     <Drawer
                         variant="temporary"

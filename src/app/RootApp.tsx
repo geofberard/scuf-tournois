@@ -5,8 +5,8 @@ import {ResultsView} from "./view/ResultsView";
 import {TeamSelector} from "./TeamSelector";
 import {Team} from "./data/Team";
 import {Navigation} from "./Navigation";
-import {LocationMap, Results, Rules, Schedule, Teams} from "./data/Pages";
-import {Page} from "./data/Page";
+import {LocationMap, Results, Rules, Schedule, Teams} from "./data/navigation/Pages";
+import {Page} from "./data/navigation/Page";
 import {TeamsView} from "./view/TeamsView";
 import {ScheduleView} from "./view/ScheduleView";
 

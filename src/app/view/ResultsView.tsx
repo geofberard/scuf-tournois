@@ -9,6 +9,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {sortByScore} from "../data/TeamUtils";
 import {TournamentView} from "./TournamentView";
+import {computeStats} from "../data/StatsUtils";
+import {Stats} from "../data/Stats";
+import {Team} from "../data/Team";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -47,21 +50,22 @@ export const ResultsView: TournamentView = ({tournament, currentTeam}) => {
                 </TableHead>
                 <TableBody>
                     {tournament.teams
+                        .map(team => ({...team, ...computeStats(team, tournament.games)}))
                         .sort(sortByScore)
                         .map((team, index) => (
                             <TableRow key={team.id}
                                       className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
                                 <TableCell align="right">{index + 1}</TableCell>
                                 <TableCell component="th" scope="row">{team.label}</TableCell>
-                                <TableCell align="right">{team.stats.score}</TableCell>
-                                <TableCell align="right">{team.stats.won}</TableCell>
-                                <TableCell align="right">{team.stats.drawn}</TableCell>
-                                <TableCell align="right">{team.stats.lost}</TableCell>
-                                <TableCell align="right" className={classes.reduced}>{team.stats.played}</TableCell>
-                                <TableCell align="right" className={classes.reduced}>{team.stats.pointsFor}</TableCell>
+                                <TableCell align="right">{team.score}</TableCell>
+                                <TableCell align="right">{team.won}</TableCell>
+                                <TableCell align="right">{team.drawn}</TableCell>
+                                <TableCell align="right">{team.lost}</TableCell>
+                                <TableCell align="right" className={classes.reduced}>{team.played}</TableCell>
+                                <TableCell align="right" className={classes.reduced}>{team.pointsFor}</TableCell>
                                 <TableCell align="right"
-                                           className={classes.reduced}>{team.stats.pointsAgainst}</TableCell>
-                                <TableCell align="right" className={classes.reduced}>{team.stats.pointsDiff}</TableCell>
+                                           className={classes.reduced}>{team.pointsAgainst}</TableCell>
+                                <TableCell align="right" className={classes.reduced}>{team.pointsDiff}</TableCell>
                             </TableRow>
                         ))}
                 </TableBody>
