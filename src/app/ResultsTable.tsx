@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
 
     focused: {
         backgroundColor: theme.palette.grey["200"],
+    },
+
+    reduced: {
+        color: theme.palette.grey["600"],
+        // fontWeight: 'bold',
     }
 }));
 
@@ -43,10 +48,10 @@ export const ResultsTable: FC<ResultTableProps> = ({teams, focus}) => {
                         <TableCell align="right">#</TableCell>
                         <TableCell>Équipe</TableCell>
                         <TableCell align="right">Score</TableCell>
-                        <TableCell align="right">Joués</TableCell>
                         <TableCell align="right">V.</TableCell>
                         <TableCell align="right">N.</TableCell>
                         <TableCell align="right">D.</TableCell>
+                        <TableCell align="right">Joués</TableCell>
                         <TableCell align="right">Marq.</TableCell>
                         <TableCell align="right">Enc.</TableCell>
                         <TableCell align="right">Diff.</TableCell>
@@ -60,13 +65,13 @@ export const ResultsTable: FC<ResultTableProps> = ({teams, focus}) => {
                             <TableCell align="right">{index + 1}</TableCell>
                             <TableCell component="th" scope="row">{row.label}</TableCell>
                             <TableCell align="right">{row.stats.score}</TableCell>
-                            <TableCell align="right">{row.stats.played}</TableCell>
                             <TableCell align="right">{row.stats.won}</TableCell>
                             <TableCell align="right">{row.stats.drawn}</TableCell>
                             <TableCell align="right">{row.stats.lost}</TableCell>
-                            <TableCell align="right">{row.stats.pointsFor}</TableCell>
-                            <TableCell align="right">{row.stats.pointsAgainst}</TableCell>
-                            <TableCell align="right">{row.stats.pointsDiff}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{row.stats.played}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{row.stats.pointsFor}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{row.stats.pointsAgainst}</TableCell>
+                            <TableCell align="right" className={classes.reduced}>{row.stats.pointsDiff}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
