@@ -4,6 +4,7 @@ import TodayIcon from '@material-ui/icons/Today';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import GroupIcon from '@material-ui/icons/Group';
 import MapIcon from '@material-ui/icons/Map';
+import SportsIcon from '@material-ui/icons/Sports';
 
 // Icons
 // import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
@@ -31,7 +32,7 @@ export const Results: Page = {
 export const Rules: Page = {
     id: "Rules",
     label: "Règles",
-    Icon: ViewListIcon
+    Icon: SportsIcon
 };
 
 export const Teams: Page = {
