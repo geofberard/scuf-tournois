@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import {sortByScore} from "../data/team/TeamUtils";
 import {TournamentView} from "./TournamentView";
 import {computeStats} from "../data/stats/StatsUtils";
+import {useTournament} from "../TournamentContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -25,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const RankingView: TournamentView = ({tournament, currentTeam}) => {
+export const RankingView: TournamentView = ({currentTeam}) => {
+    const tournament = useTournament();
     const classes = useStyles();
 
     return (

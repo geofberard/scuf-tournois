@@ -11,28 +11,17 @@ import {TournamentView} from "./TournamentView";
 import {filterConcernedTeam, filterPlayingTeam, sortByDate} from "../data/game/GameUtils";
 import {parseElementId} from "../data/Utils";
 import {TeamCell} from "./TeamCell";
+import {useTournament} from "../TournamentContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 650,
     },
-
-    focused: {
-        backgroundColor: theme.palette.grey["100"],
-    },
 }));
 
-type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
-
-export const ResultsView: TournamentView = ({tournament, currentTeam}) => {
+export const ResultsView: TournamentView = ({currentTeam}) => {
+    const tournament = useTournament();
     const classes = useStyles();
-
-    const TeamCell2 = ({teamId, align= "left"}: {teamId:string, align?: Alignment}) => (
-        <TableCell component="th" scope="row" align={align}
-                   className={currentTeam && teamId === currentTeam.id ? classes.focused : null}>
-            {parseElementId(teamId, tournament.teams).label}
-        </TableCell>
-    );
 
     return (
         <TableContainer component={Paper}>

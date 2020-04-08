@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import {sortByName} from "../data/team/TeamUtils";
 import {Container} from "@material-ui/core";
 import {TournamentView} from "./TournamentView";
+import {useTournament} from "../TournamentContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const TeamsView: TournamentView = ({tournament, currentTeam}) => {
+export const TeamsView: TournamentView = ({currentTeam}) => {
+    const tournament = useTournament();
     const classes = useStyles();
 
     return (
