@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const ResultsView: TournamentView = ({tournament, currentTeam}) => {
+export const RankingView: TournamentView = ({tournament, currentTeam}) => {
     const classes = useStyles();
 
     return (

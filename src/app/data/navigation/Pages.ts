@@ -10,9 +10,9 @@ import MapIcon from '@material-ui/icons/Map';
 // import DateRangeIcon from '@material-ui/icons/DateRange';
 // import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
-export const Results: Page = {
-    id: "Results",
-    label: "Résultats",
+export const Ranking: Page = {
+    id: "Ranking",
+    label: "Classement",
     Icon: EmojiEventsIcon
 };
 
@@ -20,6 +20,12 @@ export const Schedule: Page = {
     id: "Schedule",
     label: "Planning",
     Icon: TodayIcon
+};
+
+export const Results: Page = {
+    id: "Results",
+    label: "Résultats",
+    Icon: ViewListIcon
 };
 
 export const Rules: Page = {
