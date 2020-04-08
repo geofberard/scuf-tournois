@@ -6,9 +6,9 @@ import {TeamSelector} from "./TeamSelector";
 import {Team} from "./data/team/Team";
 import {Navigation} from "./Navigation";
 import {LocationMap, Results, Rules, Schedule, Teams} from "./data/navigation/Pages";
-import {Page} from "./data/navigation/Page";
 import {TeamsView} from "./view/TeamsView";
 import {ScheduleView} from "./view/ScheduleView";
+import {useNavigation} from "./useNavigation";
 
 const driveKey = "1qJoXQP4ECRrhydxb76WmtPMQbjDDe4ccM-xtJZ3ZNPU";
 
@@ -16,10 +16,8 @@ const ALL_PAGES = [Results, Schedule, Rules, Teams, LocationMap];
 
 export const RootApp: FC = () => {
     const data = useTournamentData(driveKey);
+    const [currentPage, setCurrentPage] = useNavigation(ALL_PAGES);
     const [currentTeam, setCurrentTeam] = useState<Team>();
-    const [currentPage, setCurrentPage] = useState<Page>(ALL_PAGES[0]);
-
-    console.log(data);
 
     return !data ? <>"Wait ...."</> : (
         <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>

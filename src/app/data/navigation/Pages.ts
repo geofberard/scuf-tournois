@@ -11,26 +11,31 @@ import MapIcon from '@material-ui/icons/Map';
 // import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 export const Results: Page = {
+    id: "Results",
     label: "Résultats",
     Icon: EmojiEventsIcon
 };
 
 export const Schedule: Page = {
+    id: "Schedule",
     label: "Planning",
     Icon: TodayIcon
 };
 
 export const Rules: Page = {
+    id: "Rules",
     label: "Règles",
     Icon: ViewListIcon
 };
 
 export const Teams: Page = {
+    id: "Teams",
     label: "Équipes",
     Icon: GroupIcon
 };
 
 export const LocationMap: Page = {
+    id: "LocationMap",
     label: "Plan",
     Icon: MapIcon
 };

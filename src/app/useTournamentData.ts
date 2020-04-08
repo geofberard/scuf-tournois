@@ -52,8 +52,8 @@ const loadGameData = (driveKey: string, setGamesData: (data: Game[]) => void) =>
 });
 
 export const useTournamentData: (driveKey: string) => Tournament = (driveKey) => {
-    const [teams, setTeams] = useState<Team[]>([]);
-    const [games, setGames] = useState<Game[]>([]);
+    const [teams, setTeams] = useState<Team[]>();
+    const [games, setGames] = useState<Game[]>();
 
     if (flag) {
         const teamsDataLoaderTemp = (loadTeamData(driveKey, setTeams));
@@ -65,17 +65,17 @@ export const useTournamentData: (driveKey: string) => Tournament = (driveKey) =>
         // @ts-ignore
         google.setOnLoadCallback(() => {
             teamsDataLoaderTemp.load();
-            setInterval(teamsDataLoaderTemp.load, 5000);
+            setInterval(teamsDataLoaderTemp.load, 30000);
         });
 
         // @ts-ignore
         google.setOnLoadCallback(() => {
             gamesDataLoaderTemp.load();
-            setInterval(gamesDataLoaderTemp.load, 5000);
+            setInterval(gamesDataLoaderTemp.load, 30000);
         });
 
         flag = false;
     }
 
-    return {teams,games } as Tournament;
+    return teams && games ? {teams,games} as Tournament : undefined;
 };

@@ -9,5 +9,3 @@ export const sortByScore = (teamA: Team & Stats, teamB: Team & Stats) => {
     }
     return teamA.score < teamB.score ? 1 : -1;
 };
-
-export const parseTeamId = (id: string, teams: Team[]) => teams.find(team => team.id === id);

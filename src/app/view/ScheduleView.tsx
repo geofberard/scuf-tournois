@@ -9,7 +9,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
 import {filterTeam, sortByDate} from "../data/game/GameUtils";
-import {parseTeamId} from "../data/team/TeamUtils";
+import {parseElementId} from "../data/Utils";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -27,7 +27,7 @@ export const ScheduleView: TournamentView = ({tournament, currentTeam}) => {
     const TeamCell = ({teamId}: {teamId:string}) => (
         <TableCell component="th" scope="row"
                    className={currentTeam && teamId === currentTeam.id ? classes.focused : null}>
-            {parseTeamId(teamId, tournament.teams).label}
+            {parseElementId(teamId, tournament.teams).label}
         </TableCell>
     );
 
