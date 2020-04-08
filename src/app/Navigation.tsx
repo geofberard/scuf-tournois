@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 display: 'none',
             },
         },
+        exitButton: {
+            marginLeft: theme.spacing(2),
+        },
         // necessary for content to be below app bar
         toolbar: theme.mixins.toolbar,
         drawerPaper: {
@@ -51,6 +54,9 @@ const useStyles = makeStyles((theme: Theme) =>
         content: {
             flexGrow: 1,
             padding: theme.spacing(3),
+        },
+        title: {
+            flexGrow: 1,
         },
     }),
 );
@@ -65,10 +71,13 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [currentTeam, setCurrentTeam] = useCurrentTeam();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+    const disconnect = () => setCurrentTeam(undefined);
 
     const drawer = (
         <div>
@@ -76,7 +85,12 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
             <Divider/>
             <List>
                 {pages.map((page, index) => (
-                    <ListItem button key={page.label} onClick={() => onChange(page)} selected={page === currentPage}>
+                    <ListItem button key={page.label}
+                              onClick={() => {
+                                  setMobileOpen(false);
+                                  onChange(page)
+                              }}
+                              selected={page === currentPage}>
                         <ListItemIcon>
                             <page.Icon color={page === currentPage ? "primary" : "inherit"}/>
                         </ListItemIcon>
@@ -87,7 +101,7 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
             <Divider/>
             <ListItem button>
                 <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-                <ListItemText primary={"Quitter"}/>
+                <ListItemText primary={"Quitter"} onClick={disconnect}/>
             </ListItem>
         </div>
     );
@@ -106,9 +120,22 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" noWrap>
+                    <Typography variant="h6" noWrap className={classes.title}>
                         Tournois SCUF
                     </Typography>
+                    {currentTeam && (
+                        <>
+                            <Typography variant="h6">
+                                {currentTeam.label}
+                            </Typography>
+                            <IconButton aria-label="show 4 new mails"
+                                        color="inherit"
+                                        className={classes.exitButton}
+                                        onClick={disconnect}>
+                                <ExitToAppIcon />
+                            </IconButton>
+                        </>
+                    )}
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">

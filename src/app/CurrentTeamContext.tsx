@@ -43,6 +43,9 @@ export const CurrentTeamManager: FC = ({children}) => {
     let setCurrentTeamAndPersist = (team) => {
         setCurrentTeam(team);
         setCookie(team, 10);
+        if(team === undefined) {
+            window.location.href = "/"
+        }
     };
 
     useEffect(() => setCurrentTeam(currentTeam || parseElementId(getTeamCookie(), tournament.teams)),[tournament]);
