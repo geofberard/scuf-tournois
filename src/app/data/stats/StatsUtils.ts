@@ -17,17 +17,25 @@ const initialStats: Stats = {
     pointsDiff: 0,
 };
 
-const getResult = (teamId: String, game: Game) => {
+export const getWinner = (game: Game) => {
     if (game.scoreA === game.scoreB) {
-        return GameIssue.DRAWN;
+        return undefined;
     }
-    return game.teamA === teamId && game.scoreA > game.scoreB || game.teamB === teamId && game.scoreA < game.scoreB ? GameIssue.VICTORY : GameIssue.DEFEAT;
+    return game.scoreA > game.scoreB ? game.teamA : game.teamB;
+};
+
+const getResult = (team: Team, game: Game) => {
+    const winner = getWinner(game);
+
+    return winner
+        ? winner === team.id ? GameIssue.VICTORY : GameIssue.DEFEAT
+        : GameIssue.DRAWN;
 };
 
 export const computeStats: (team: Team, games: Game[]) => Stats = (team, games) => {
     return games.filter(game => game.teamA === team.id || game.teamB === team.id)
         .reduce((stats, game) => {
-            const issue = getResult(team.id, game);
+            const issue = getResult(team, game);
             const pointsFor = team.id === game.teamA ? game.scoreA : game.scoreB;
             const pointsAgainst = team.id === game.teamA ? game.scoreB : game.scoreA;
             return {

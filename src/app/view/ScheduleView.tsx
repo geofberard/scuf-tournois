@@ -9,7 +9,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
 import {filterConcernedTeam, sortByDate} from "../data/game/GameUtils";
-import {TeamCell} from "./TeamCell";
+import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
 
@@ -23,6 +23,7 @@ export const ScheduleView: TournamentView = () => {
     const tournament = useTournament();
     const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
+    const cellClasses = useCellStyles();
 
     return (
         <TableContainer component={Paper}>
@@ -31,8 +32,7 @@ export const ScheduleView: TournamentView = () => {
                     <TableRow>
                         <TableCell>Heure</TableCell>
                         <TableCell>Terrain</TableCell>
-                        <TableCell>Équipes</TableCell>
-                        <TableCell></TableCell>
+                        <TableCell align="center" colSpan={3}>Équipes</TableCell>
                         <TableCell>Arbitre</TableCell>
                     </TableRow>
                 </TableHead>
@@ -42,10 +42,11 @@ export const ScheduleView: TournamentView = () => {
                         .filter(filterConcernedTeam(currentTeam))
                         .map((game, index) => (
                             <TableRow key={game.id}>
-                                <TableCell component="th" scope="row">{game.time.toLocaleTimeString()}</TableCell>
-                                <TableCell component="th" scope="row">{game.court}</TableCell>
-                                <TeamCell teamId={game.teamA} align="right"/>
-                                <TeamCell teamId={game.teamB}/>
+                                <TableCell>{game.time.toLocaleTimeString()}</TableCell>
+                                <TableCell>{game.court}</TableCell>
+                                <TeamCell teamId={game.teamA} className={cellClasses.teamA}/>
+                                <TableCell className={cellClasses.narrow}>-</TableCell>
+                                <TeamCell teamId={game.teamB} className={cellClasses.teamB}/>
                                 <TeamCell teamId={game.referee}/>
                             </TableRow>
                         ))}

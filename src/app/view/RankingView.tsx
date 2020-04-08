@@ -12,6 +12,7 @@ import {TournamentView} from "./TournamentView";
 import {computeStats} from "../data/stats/StatsUtils";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
+import {useCellStyles} from "./TeamCell";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -19,10 +20,14 @@ const useStyles = makeStyles((theme) => ({
     },
 
     focused: {
+        "& td": {
+            fontWeight: "bold",
+        },
         backgroundColor: theme.palette.grey["100"],
     },
 
     reduced: {
+        width: 40,
         color: theme.palette.grey["600"],
     }
 }));
@@ -31,22 +36,25 @@ export const RankingView: TournamentView = () => {
     const tournament = useTournament();
     const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
+    const cellClasses = useCellStyles();
 
+    let narrowAndReduced = `${cellClasses.narrow} ${classes.reduced}`;
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader size="small">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="right">#</TableCell>
+                        <TableCell className={cellClasses.narrow}>#</TableCell>
                         <TableCell>Équipe</TableCell>
-                        <TableCell align="right">Score</TableCell>
-                        <TableCell align="right">V.</TableCell>
-                        <TableCell align="right">N.</TableCell>
-                        <TableCell align="right">D.</TableCell>
-                        <TableCell align="right">Joués</TableCell>
-                        <TableCell align="right">Marq.</TableCell>
-                        <TableCell align="right">Enc.</TableCell>
-                        <TableCell align="right">Diff.</TableCell>
+                        <TableCell align="center">Score</TableCell>
+                        <TableCell className={cellClasses.narrow}>V.</TableCell>
+                        <TableCell className={cellClasses.narrow}>N.</TableCell>
+                        <TableCell className={cellClasses.narrow}>D.</TableCell>
+                        <TableCell className={cellClasses.narrow}/>
+                        <TableCell className={cellClasses.narrow}>Joués</TableCell>
+                        <TableCell className={cellClasses.narrow}>Marq.</TableCell>
+                        <TableCell className={cellClasses.narrow}>Enc.</TableCell>
+                        <TableCell className={cellClasses.narrow}>Diff.</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -56,17 +64,17 @@ export const RankingView: TournamentView = () => {
                         .map((team, index) => (
                             <TableRow key={team.id}
                                       className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
-                                <TableCell align="right">{index + 1}</TableCell>
-                                <TableCell component="th" scope="row">{team.label}</TableCell>
-                                <TableCell align="right">{team.score}</TableCell>
-                                <TableCell align="right">{team.won}</TableCell>
-                                <TableCell align="right">{team.drawn}</TableCell>
-                                <TableCell align="right">{team.lost}</TableCell>
-                                <TableCell align="right" className={classes.reduced}>{team.played}</TableCell>
-                                <TableCell align="right" className={classes.reduced}>{team.pointsFor}</TableCell>
-                                <TableCell align="right"
-                                           className={classes.reduced}>{team.pointsAgainst}</TableCell>
-                                <TableCell align="right" className={classes.reduced}>{team.pointsDiff}</TableCell>
+                                <TableCell className={cellClasses.narrow}>{index + 1}</TableCell>
+                                <TableCell>{team.label}</TableCell>
+                                <TableCell align="center">{team.score}</TableCell>
+                                <TableCell className={cellClasses.narrow} >{team.won}</TableCell>
+                                <TableCell className={cellClasses.narrow} >{team.drawn}</TableCell>
+                                <TableCell className={cellClasses.narrow} >{team.lost}</TableCell>
+                                <TableCell className={cellClasses.narrow}/>
+                                <TableCell className={narrowAndReduced}>{team.played}</TableCell>
+                                <TableCell className={narrowAndReduced}>{team.pointsFor}</TableCell>
+                                <TableCell className={narrowAndReduced}>{team.pointsAgainst}</TableCell>
+                                <TableCell className={narrowAndReduced}>{team.pointsDiff}</TableCell>
                             </TableRow>
                         ))}
                 </TableBody>

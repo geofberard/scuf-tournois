@@ -3,29 +3,47 @@ import {parseElementId} from "../data/Utils";
 import * as React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {useTournament} from "../TournamentContext";
-import {useCurrentTeam} from "../CurrentTeamContext";
 
-const useStyles = makeStyles((theme) => ({
-    focused: {
-        backgroundColor: theme.palette.grey["100"],
+export const useCellStyles = makeStyles((theme) => ({
+    narrow: {
+        textAlign: "center",
+        paddingLeft: 5,
+        paddingRight: 5,
+        '&:first-child': {
+            textAlign: "right",
+        }
+    },
+
+    teamA: {
+        fontWeight: "bold",
+        textAlign: "right",
+        paddingRight: 5,
+    },
+
+    teamB: {
+        fontWeight: "bold",
+        textAlign: "left",
+        paddingLeft: 5,
+    },
+
+    tableCell: {
+        // fontWeight: "bold",
     },
 }));
 
-type Alignment = 'inherit' | 'left' | 'center' | 'right' | 'justify';
-
 interface TeamCellProps {
     teamId: string,
-    align?: Alignment,
+    className?: string,
 };
 
-export const TeamCell = ({teamId,  align= "left"}: TeamCellProps) => {
+
+export const TeamCell = ({teamId,  className= ""}: TeamCellProps) => {
     const tournament = useTournament();
-    const [currentTeam] = useCurrentTeam();
-    const classes = useStyles();
+    const classes = useCellStyles();
 
     return (
-        <TableCell component="th" scope="row" align={align}
-                   className={currentTeam && teamId === currentTeam.id ? classes.focused : null}>
+        <TableCell component="th" scope="row"
+                   className={`${classes.tableCell} ${className}`}>
             {parseElementId(teamId, tournament.teams).label}
         </TableCell>
     );

@@ -8,42 +8,56 @@ import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
-import {filterConcernedTeam, filterPlayingTeam, sortByDate} from "../data/game/GameUtils";
-import {parseElementId} from "../data/Utils";
-import {TeamCell} from "./TeamCell";
+import {filterPlayingTeam, sortByDate} from "../data/game/GameUtils";
+import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
+import {getWinner} from "../data/stats/StatsUtils";
 
 const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 650,
+    },
+
+    bold: {
+        fontWeight: "bold",
+    },
+
+    looser: {
+        color: theme.palette.grey["500"],
     },
 }));
 
 export const ResultsView: TournamentView = () => {
     const tournament = useTournament();
     const [currentTeam] = useCurrentTeam();
+
     const classes = useStyles();
+    const cellClasses = useCellStyles();
+
+    const scoreClass = `${cellClasses.narrow} ${classes.bold}`;
 
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="right">Équipes</TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                </TableHead>
                 <TableBody>
                     {tournament.games
                         .sort(sortByDate)
                         .filter(filterPlayingTeam(currentTeam))
-                        .map((game, index) => (
-                            <TableRow key={game.id}>
-                                <TeamCell teamId={game.teamA} align="right"/>
-                                <TeamCell teamId={game.teamB}/>
-                            </TableRow>
-                        ))}
+                        .map((game, index) => {
+                            const winner = getWinner(game);
+                            let extraClassA = winner === game.teamB ? classes.looser : "";
+                            let extraClassB = winner === game.teamA ? classes.looser : "";
+                            return (
+                                <TableRow key={game.id}>
+                                    <TeamCell className={`${cellClasses.teamA} ${extraClassA}`} teamId={game.teamA}/>
+                                    <TableCell className={`${scoreClass} ${extraClassA}`}>{game.scoreA}</TableCell>
+                                    <TableCell className={scoreClass}>-</TableCell>
+                                    <TableCell className={`${scoreClass} ${extraClassB}`}>{game.scoreB}</TableCell>
+                                    <TeamCell className={`${cellClasses.teamB} ${extraClassB}`} teamId={game.teamB}/>
+                                </TableRow>
+                            )
+                        })}
                 </TableBody>
             </Table>
         </TableContainer>

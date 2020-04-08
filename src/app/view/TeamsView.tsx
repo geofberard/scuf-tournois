@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     },
 
     focused: {
+        "& td": {
+            fontWeight: "bold",
+        },
         backgroundColor: theme.palette.grey["100"],
     },
 }));
@@ -34,7 +37,7 @@ export const TeamsView: TournamentView = () => {
                 <Table className={classes.table} stickyHeader size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Équipe</TableCell>
+                            <TableCell align="center">Équipes</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -43,7 +46,7 @@ export const TeamsView: TournamentView = () => {
                             .map((team, index) => (
                                 <TableRow key={team.id}
                                           className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
-                                    <TableCell component="th" scope="row">{team.label}</TableCell>
+                                    <TableCell align="center" scope="row">{team.label}</TableCell>
                                 </TableRow>
                             ))}
                     </TableBody>
