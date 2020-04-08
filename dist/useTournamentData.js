@@ -26,86 +26,45 @@ var loadGameData = function (driveKey, setGamesData) { return ({
             var driveData = response.getDataTable();
             var gamesData = [];
             for (var i = 0; i < driveData.getNumberOfRows(); i++) {
-                var dateArray = driveData.getValue(i, 2);
+                var dateArray = driveData.getValue(i, 0);
+                var teamA = driveData.getValue(i, 2);
+                var teamB = driveData.getValue(i, 3);
                 gamesData.push({
-                    teamA: driveData.getValue(i, 0),
-                    teamB: driveData.getValue(i, 1),
+                    id: "" + dateArray[0] + dateArray[1] + teamA + teamB,
                     time: new Date(today.getFullYear(), today.getMonth(), today.getDate(), dateArray[0], dateArray[1]),
-                    court: driveData.getValue(i, 3),
-                    scoreA: driveData.getValue(i, 4),
-                    scoreB: driveData.getValue(i, 5),
+                    court: driveData.getValue(i, 1),
+                    teamA: teamA,
+                    teamB: teamB,
+                    referee: driveData.getValue(i, 4),
+                    scoreA: driveData.getValue(i, 5),
+                    scoreB: driveData.getValue(i, 6),
                 });
             }
             setGamesData(gamesData);
         });
     }
 }); };
-var initialStats = {
-    played: 0,
-    won: 0,
-    drawn: 0,
-    lost: 0,
-    score: 0,
-    pointsFor: 0,
-    pointsAgainst: 0,
-    pointsDiff: 0,
-};
-var GameIssue;
-(function (GameIssue) {
-    GameIssue[GameIssue["VICTORY"] = 3] = "VICTORY";
-    GameIssue[GameIssue["DEFEAT"] = 1] = "DEFEAT";
-    GameIssue[GameIssue["DRAWN"] = 0] = "DRAWN";
-})(GameIssue || (GameIssue = {}));
-var getResult = function (teamId, game) {
-    if (game.scoreA === game.scoreB) {
-        return GameIssue.DRAWN;
-    }
-    return game.teamA === teamId && game.scoreA > game.scoreB || game.teamB === teamId && game.scoreA < game.scoreB ? GameIssue.VICTORY : GameIssue.DEFEAT;
-};
-var computeStats = function (team, games) {
-    return games.filter(function (game) { return game.teamA === team.id || game.teamB === team.id; })
-        .reduce(function (stats, game) {
-        var issue = getResult(team.id, game);
-        var pointsFor = team.id === game.teamA ? game.scoreA : game.scoreB;
-        var pointsAgainst = team.id === game.teamA ? game.scoreB : game.scoreA;
-        return {
-            played: stats.played + (game.scoreA === null ? 0 : 1),
-            won: stats.won + (issue === GameIssue.VICTORY ? 1 : 0),
-            drawn: stats.drawn + (issue === GameIssue.DRAWN ? 1 : 0),
-            lost: stats.lost + (issue === GameIssue.DEFEAT ? 1 : 0),
-            score: stats.score + issue,
-            pointsFor: stats.pointsFor + pointsFor,
-            pointsAgainst: stats.pointsAgainst + pointsAgainst,
-            pointsDiff: stats.pointsDiff + pointsFor - pointsAgainst,
-        };
-    }, initialStats);
-};
 export var useTournamentData = function (driveKey) {
-    var _a = useState([]), teamsData = _a[0], setTeamsData = _a[1];
-    var _b = useState([]), gamesData = _b[0], setGamesData = _b[1];
+    var _a = useState(), teams = _a[0], setTeams = _a[1];
+    var _b = useState(), games = _b[0], setGames = _b[1];
+    var _c = useState(), games = _c[0], setGames = _c[1];
     if (flag) {
-        var teamsDataLoaderTemp_1 = (loadTeamData(driveKey, setTeamsData));
-        var gamesDataLoaderTemp_1 = (loadGameData(driveKey, setGamesData));
+        var teamsDataLoaderTemp_1 = (loadTeamData(driveKey, setTeams));
+        var gamesDataLoaderTemp_1 = (loadGameData(driveKey, setGames));
         // @ts-ignore
         google.load('visualization', '1.0', { 'packages': ['controls', 'corechart', 'table'] });
         // @ts-ignore
         google.setOnLoadCallback(function () {
             teamsDataLoaderTemp_1.load();
-            setInterval(teamsDataLoaderTemp_1.load, 5000);
+            setInterval(teamsDataLoaderTemp_1.load, 30000);
         });
         // @ts-ignore
         google.setOnLoadCallback(function () {
             gamesDataLoaderTemp_1.load();
-            setInterval(gamesDataLoaderTemp_1.load, 5000);
+            setInterval(gamesDataLoaderTemp_1.load, 30000);
         });
         flag = false;
     }
-    return {
-        teams: teamsData.map(function (spreadSheet) { return ({
-            id: spreadSheet.id,
-            label: spreadSheet.label,
-            stats: computeStats(spreadSheet, gamesData)
-        }); })
-    };
+    return teams && games ? { teams: teams, games: games } : undefined;
 };
 //# sourceMappingURL=useTournamentData.js.map

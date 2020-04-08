@@ -10,6 +10,7 @@ import {useNavigation} from "./useNavigation";
 import {ResultsView} from "./view/ResultsView";
 import {TournamentDataManager} from "./TournamentContext";
 import {CurrentTeamManager} from "./CurrentTeamContext";
+import {RulesView} from "./view/RulesView";
 
 const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap];
 
@@ -25,6 +26,7 @@ export const RootApp: FC = () => {
                     {(currentPage === Schedule) && <ScheduleView/>}
                     {(currentPage === Results) && <ResultsView/>}
                     {(currentPage === Teams) && <TeamsView/>}
+                    {(currentPage === Rules) && <RulesView/>}
                 </Navigation>
             </CurrentTeamManager>
         </TournamentDataManager>
