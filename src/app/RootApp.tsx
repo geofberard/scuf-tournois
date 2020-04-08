@@ -9,6 +9,7 @@ import {LocationMap, Ranking, Results, Rules, Schedule, Teams} from "./data/navi
 import {TeamsView} from "./view/TeamsView";
 import {ScheduleView} from "./view/ScheduleView";
 import {useNavigation} from "./useNavigation";
+import {ResultsView} from "./view/ResultsView";
 
 const driveKey = "1qJoXQP4ECRrhydxb76WmtPMQbjDDe4ccM-xtJZ3ZNPU";
 
@@ -24,6 +25,7 @@ export const RootApp: FC = () => {
             <TeamSelector currentTeam={currentTeam} teams={data.teams} onChange={setCurrentTeam}/>
             {(currentPage === Ranking) && <RankingView tournament={data} currentTeam={currentTeam}/>}
             {(currentPage === Schedule) && <ScheduleView tournament={data} currentTeam={currentTeam}/>}
+            {(currentPage === Results) && <ResultsView tournament={data} currentTeam={currentTeam}/>}
             {(currentPage === Teams) && <TeamsView tournament={data} currentTeam={currentTeam}/>}
         </Navigation>
     );
