@@ -12,18 +12,26 @@ import {useNavigation} from "./useNavigation";
 import {ResultsView} from "./view/ResultsView";
 import {Tournament} from "./data/Tournament";
 
-const driveKey = "1qJoXQP4ECRrhydxb76WmtPMQbjDDe4ccM-xtJZ3ZNPU";
 
-const TournamentContext: React.Context<Tournament> = React.createContext(undefined);
+interface CurrentTeamManagerValue {
+    currentTeam: Team;
+    setCurrentTeam: (team: Team) => void;
+}
 
-export const TournamentDataManager: FC = ({children}) => {
-    const data = useTournamentData(driveKey);
+const CurrentTeamContext: React.Context<CurrentTeamManagerValue> = React.createContext(undefined);
 
-    return !data ? <>"Wait ...."</> : (
-        <TournamentContext.Provider value={data}>
+export const CurrentTeamManager: FC = ({children}) => {
+    const [currentTeam, setCurrentTeam] = useState<Team>();
+
+    return (
+        <CurrentTeamContext.Provider value={{currentTeam, setCurrentTeam}}>
             {children}
-        </TournamentContext.Provider>
+        </CurrentTeamContext.Provider>
     );
 };
 
-export const useTournament: () => Tournament = () => useContext(TournamentContext) || {} as Tournament;
+export const useCurrentTeam: () => [Team, (team: Team) => void] = () => {
+    const manager = useContext(CurrentTeamContext);
+
+    return [manager.currentTeam, manager.setCurrentTeam]
+}

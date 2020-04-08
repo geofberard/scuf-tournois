@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Page} from "./data/navigation/Page";
+import {useCurrentTeam} from "./CurrentTeamContext";
 
 const drawerWidth = 240;
 

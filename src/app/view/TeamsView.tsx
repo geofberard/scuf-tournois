@@ -11,6 +11,7 @@ import {sortByName} from "../data/team/TeamUtils";
 import {Container} from "@material-ui/core";
 import {TournamentView} from "./TournamentView";
 import {useTournament} from "../TournamentContext";
+import {useCurrentTeam} from "../CurrentTeamContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -22,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const TeamsView: TournamentView = ({currentTeam}) => {
+export const TeamsView: TournamentView = () => {
     const tournament = useTournament();
+    const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
 
     return (

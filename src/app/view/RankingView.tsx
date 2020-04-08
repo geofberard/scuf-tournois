@@ -11,6 +11,7 @@ import {sortByScore} from "../data/team/TeamUtils";
 import {TournamentView} from "./TournamentView";
 import {computeStats} from "../data/stats/StatsUtils";
 import {useTournament} from "../TournamentContext";
+import {useCurrentTeam} from "../CurrentTeamContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -26,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const RankingView: TournamentView = ({currentTeam}) => {
+export const RankingView: TournamentView = () => {
     const tournament = useTournament();
+    const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
 
     return (

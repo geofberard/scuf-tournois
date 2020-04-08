@@ -11,6 +11,7 @@ import {TournamentView} from "./TournamentView";
 import {filterConcernedTeam, sortByDate} from "../data/game/GameUtils";
 import {TeamCell} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
+import {useCurrentTeam} from "../CurrentTeamContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -18,8 +19,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const ScheduleView: TournamentView = ({currentTeam}) => {
+export const ScheduleView: TournamentView = () => {
     const tournament = useTournament();
+    const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
 
     return (
@@ -42,9 +44,9 @@ export const ScheduleView: TournamentView = ({currentTeam}) => {
                             <TableRow key={game.id}>
                                 <TableCell component="th" scope="row">{game.time.toLocaleTimeString()}</TableCell>
                                 <TableCell component="th" scope="row">{game.court}</TableCell>
-                                <TeamCell teamId={game.teamA} teams={tournament.teams} focused={currentTeam && game.teamA === currentTeam.id} align="right"/>
-                                <TeamCell teamId={game.teamB} teams={tournament.teams} focused={currentTeam && game.teamB === currentTeam.id}/>
-                                <TeamCell teamId={game.referee} teams={tournament.teams} focused={currentTeam && game.referee === currentTeam.id}/>
+                                <TeamCell teamId={game.teamA} align="right"/>
+                                <TeamCell teamId={game.teamB}/>
+                                <TeamCell teamId={game.referee}/>
                             </TableRow>
                         ))}
                 </TableBody>

@@ -12,6 +12,7 @@ import {filterConcernedTeam, filterPlayingTeam, sortByDate} from "../data/game/G
 import {parseElementId} from "../data/Utils";
 import {TeamCell} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
+import {useCurrentTeam} from "../CurrentTeamContext";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -19,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const ResultsView: TournamentView = ({currentTeam}) => {
+export const ResultsView: TournamentView = () => {
     const tournament = useTournament();
+    const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
 
     return (
@@ -38,8 +40,8 @@ export const ResultsView: TournamentView = ({currentTeam}) => {
                         .filter(filterPlayingTeam(currentTeam))
                         .map((game, index) => (
                             <TableRow key={game.id}>
-                                <TeamCell teamId={game.teamA} teams={tournament.teams} focused={currentTeam && game.teamA === currentTeam.id} align="right"/>
-                                <TeamCell teamId={game.teamB} teams={tournament.teams} focused={currentTeam && game.teamB === currentTeam.id}/>
+                                <TeamCell teamId={game.teamA} align="right"/>
+                                <TeamCell teamId={game.teamB}/>
                             </TableRow>
                         ))}
                 </TableBody>
