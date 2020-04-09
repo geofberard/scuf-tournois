@@ -12,7 +12,8 @@ import {filterPlayingTeam, sortByDate} from "../data/game/GameUtils";
 import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
-import {getWinner} from "../data/stats/StatsUtils";
+import {GameIssue, getResult, getWinner} from "../data/stats/StatsUtils";
+import {Game} from "../data/game/Game";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
     looser: {
         color: theme.palette.grey["500"],
     },
+
+    teamWins: {
+        backgroundColor: theme.palette.success["50"],
+    },
+
+    teamLooses: {
+        backgroundColor: theme.palette.error["50"],
+    },
 }));
 
 export const ResultsView: TournamentView = () => {
@@ -36,6 +45,17 @@ export const ResultsView: TournamentView = () => {
     const cellClasses = useCellStyles();
 
     const scoreClass = `${cellClasses.narrow} ${classes.bold}`;
+
+    const getRawClassName = (game: Game) => {
+        switch(getResult(currentTeam, game)) {
+            case GameIssue.VICTORY:
+                return classes.teamWins;
+            case GameIssue.DEFEAT:
+                return classes.teamLooses;
+            default:
+                return ""
+        }
+    };
 
     return (
         <TableContainer component={Paper}>
@@ -49,7 +69,7 @@ export const ResultsView: TournamentView = () => {
                             let extraClassA = winner === game.teamB ? classes.looser : "";
                             let extraClassB = winner === game.teamA ? classes.looser : "";
                             return (
-                                <TableRow key={game.id}>
+                                <TableRow key={game.id} className={currentTeam ? getRawClassName(game) : ""}>
                                     <TeamCell className={`${cellClasses.teamA} ${extraClassA}`} teamId={game.teamA}/>
                                     <TableCell className={`${scoreClass} ${extraClassA}`}>{game.scoreA}</TableCell>
                                     <TableCell className={scoreClass}>-</TableCell>

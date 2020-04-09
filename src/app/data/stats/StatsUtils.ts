@@ -2,7 +2,7 @@ import {Stats} from "./Stats";
 import {Team} from "../team/Team";
 import {Game} from "../game/Game";
 
-enum GameIssue {
+export enum GameIssue {
     VICTORY = 3, DEFEAT = 1, DRAWN = 0
 }
 
@@ -24,7 +24,7 @@ export const getWinner = (game: Game) => {
     return game.scoreA > game.scoreB ? game.teamA : game.teamB;
 };
 
-const getResult = (team: Team, game: Game) => {
+export const getResult = (team: Team, game: Game) => {
     const winner = getWinner(game);
 
     return winner

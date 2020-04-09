@@ -11,13 +11,25 @@ import {ResultsView} from "./view/ResultsView";
 import {TournamentDataManager} from "./TournamentContext";
 import {CurrentTeamManager} from "./CurrentTeamContext";
 import {RulesView} from "./view/RulesView";
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import lightGreen from '@material-ui/core/colors/lightGreen';
+import green from "@material-ui/core/colors/green";
+import red from "@material-ui/core/colors/red";
 
 const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap];
+
+const theme = createMuiTheme({
+    palette: {
+        error: red,
+        success: green,
+    },
+});
 
 export const RootApp: FC = () => {
     const [currentPage, setCurrentPage] = useNavigation(ALL_PAGES);
 
     return (
+        <ThemeProvider theme={theme}>
         <TournamentDataManager>
             <CurrentTeamManager>
                 <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>
@@ -30,5 +42,6 @@ export const RootApp: FC = () => {
                 </Navigation>
             </CurrentTeamManager>
         </TournamentDataManager>
+        </ThemeProvider>
     );
 };
