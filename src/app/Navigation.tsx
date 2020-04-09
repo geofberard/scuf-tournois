@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
@@ -17,6 +16,8 @@ import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/style
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Page} from "./data/navigation/Page";
 import {useCurrentTeam} from "./login/CurrentTeamContext";
+import RefreshIcon from '@material-ui/icons/Refresh';
+import {useTournament} from "./TournamentContext";
 
 const drawerWidth = 240;
 
@@ -68,16 +69,16 @@ interface NavigationProps {
 }
 
 export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,children}) => {
+    const [currentTeam, setCurrentTeam] = useCurrentTeam();
+    const [, refresh ] = useTournament();
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+
     const classes = useStyles();
     const theme = useTheme();
-    const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [currentTeam, setCurrentTeam] = useCurrentTeam();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
-    const disconnect = () => setCurrentTeam(undefined);
 
     const drawer = (
         <div>
@@ -101,7 +102,7 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
             <Divider/>
             <ListItem button>
                 <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-                <ListItemText primary={"Quitter"} onClick={disconnect}/>
+                <ListItemText primary={"Quitter"} onClick={() => setCurrentTeam(undefined)}/>
             </ListItem>
         </div>
     );
@@ -127,14 +128,14 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
                             <Typography variant="h6">
                                 {currentTeam.label}
                             </Typography>
-                            <IconButton aria-label="show 4 new mails"
-                                        color="inherit"
-                                        className={classes.exitButton}
-                                        onClick={disconnect}>
-                                <ExitToAppIcon />
-                            </IconButton>
                         </>
                     )}
+                    <IconButton aria-label="show 4 new mails"
+                                color="inherit"
+                                className={classes.exitButton}
+                                onClick={refresh}>
+                        <RefreshIcon />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer} aria-label="mailbox folders">

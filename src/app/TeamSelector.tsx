@@ -7,7 +7,7 @@ import {useTournament} from "./TournamentContext";
 import {useCurrentTeam} from "./login/CurrentTeamContext";
 
 export const TeamSelector = () => {
-    const tournament = useTournament();
+    const [tournament] = useTournament();
     const [currentTeam, setCurrentTeam] = useCurrentTeam();
 
     return (

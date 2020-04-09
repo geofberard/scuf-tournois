@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ScheduleView: TournamentView = () => {
-    const tournament = useTournament();
+    const [tournament] = useTournament();
     const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
     const cellClasses = useCellStyles();

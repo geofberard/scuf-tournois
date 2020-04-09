@@ -24,7 +24,7 @@ const parseRule = (rule: Rule) => {
 };
 
 export const RulesView = () => {
-    const tournament = useTournament();
+    const [tournament] = useTournament();
 
     return (
         <Container maxWidth="sm">

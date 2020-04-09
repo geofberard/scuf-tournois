@@ -57,7 +57,7 @@ interface TeamCellProps {
 
 
 export const TeamCell = ({teamId,  className= ""}: TeamCellProps) => {
-    const tournament = useTournament();
+    const [tournament] = useTournament();
     const classes = useCellStyles();
 
     return (

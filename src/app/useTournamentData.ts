@@ -4,6 +4,11 @@ import {Team} from "./data/team/Team";
 import {Game} from "./data/game/Game";
 import {Rule} from "./data/rule/Rule";
 
+export interface TournamentManager {
+    tournament: Tournament;
+    refresh: () => void;
+}
+
 const loadTeams = (driveKey: string, setTeamsData: (data: Team[]) => void) => ({
     load: () => {
         // @ts-ignore
@@ -69,15 +74,16 @@ const loadRules = (driveKey: string, setGamesData: (data: Rule[]) => void) => ({
 
 let flag = true;
 
-export const useTournamentData: (driveKey: string) => Tournament = (driveKey) => {
+export const useTournamentData: (driveKey: string) => TournamentManager = (driveKey) => {
     const [teams, setTeams] = useState<Team[]>();
     const [games, setGames] = useState<Game[]>();
     const [rules, setRules] = useState<Rule[]>();
 
+    const teamsDataLoaderTemp = (loadTeams(driveKey, setTeams));
+    const gamesDataLoaderTemp = (loadGames(driveKey, setGames));
+    const ruleDataLoaderTemp = (loadRules(driveKey, setRules));
+
     if (flag) {
-        const teamsDataLoaderTemp = (loadTeams(driveKey, setTeams));
-        const gamesDataLoaderTemp = (loadGames(driveKey, setGames));
-        const ruleDataLoaderTemp = (loadRules(driveKey, setRules));
 
         // @ts-ignore
         google.load('visualization', '1.0', {'packages': ['controls', 'corechart', 'table']});
@@ -85,21 +91,21 @@ export const useTournamentData: (driveKey: string) => Tournament = (driveKey) =>
         // @ts-ignore
         google.setOnLoadCallback(() => {
             teamsDataLoaderTemp.load();
-        });
-
-        // @ts-ignore
-        google.setOnLoadCallback(() => {
             gamesDataLoaderTemp.load();
-            setInterval(gamesDataLoaderTemp.load, 30000);
-        });
-
-        // @ts-ignore
-        google.setOnLoadCallback(() => {
             ruleDataLoaderTemp.load();
         });
 
         flag = false;
     }
 
-    return teams && games && rules ? {teams, games, rules} as Tournament : undefined;
+    const refresh = () => {
+        teamsDataLoaderTemp.load();
+        gamesDataLoaderTemp.load();
+        ruleDataLoaderTemp.load();
+    };
+
+    const tournament = teams && games && rules ? {teams, games, rules} as Tournament : undefined;
+
+
+    return { tournament, refresh };
 };

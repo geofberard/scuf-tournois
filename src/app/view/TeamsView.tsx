@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const TeamsView: TournamentView = () => {
-    const tournament = useTournament();
+    const [tournament] = useTournament();
     const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
     const cellClasses = useCellStyles();

@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ResultsView: TournamentView = () => {
-    const tournament = useTournament();
+    const [tournament] = useTournament();
     const [currentTeam] = useCurrentTeam();
 
     const classes = useStyles();

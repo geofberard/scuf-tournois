@@ -7,8 +7,8 @@ import {TeamsView} from "./view/TeamsView";
 import {ScheduleView} from "./view/ScheduleView";
 import {useNavigation} from "./useNavigation";
 import {ResultsView} from "./view/ResultsView";
-import {TournamentDataManager} from "./TournamentContext";
-import {CurrentTeamManager} from "./login/CurrentTeamContext";
+import {TournamentDataManagerContext} from "./TournamentContext";
+import {CurrentTeamManagerContext} from "./login/CurrentTeamContext";
 import {RulesView} from "./view/RulesView";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import green from "@material-ui/core/colors/green";
@@ -30,8 +30,8 @@ export const RootApp: FC = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <TournamentDataManager>
-                <CurrentTeamManager>
+            <TournamentDataManagerContext>
+                <CurrentTeamManagerContext>
                     <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>
                         {(currentPage === Ranking) && <RankingView/>}
                         {(currentPage === Schedule) && <ScheduleView/>}
@@ -39,8 +39,8 @@ export const RootApp: FC = () => {
                         {(currentPage === Teams) && <TeamsView/>}
                         {(currentPage === Rules) && <RulesView/>}
                     </Navigation>
-                </CurrentTeamManager>
-            </TournamentDataManager>
+                </CurrentTeamManagerContext>
+            </TournamentDataManagerContext>
         </ThemeProvider>
     );
 };

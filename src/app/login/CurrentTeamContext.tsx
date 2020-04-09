@@ -6,18 +6,16 @@ import {parseElementId} from "../data/Utils";
 import {CurrentTeamLogin} from "./CurrentTeamLogin";
 import {getTeamCookie, setCookie} from "./TeamCookieUtils";
 
-
-interface CurrentTeamManagerValue {
+interface CurrentTeamManager {
     currentTeam: Team;
     setCurrentTeam: (team: Team) => void;
 }
 
-const CurrentTeamContext: React.Context<CurrentTeamManagerValue> = React.createContext(undefined);
+const CurrentTeamContext: React.Context<CurrentTeamManager> = React.createContext(undefined);
 
-
-export const CurrentTeamManager: FC = ({children}) => {
+export const CurrentTeamManagerContext: FC = ({children}) => {
     const [currentTeam, setCurrentTeam] = useState<Team>();
-    const tournament = useTournament();
+    const [tournament] = useTournament();
 
     let setCurrentTeamAndPersist = (team) => {
         setCurrentTeam(team);

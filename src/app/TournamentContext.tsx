@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useContext, useState} from 'react';
-import {useTournamentData} from "./useTournamentData";
+import {TournamentManager, useTournamentData} from "./useTournamentData";
 import {RankingView} from "./view/RankingView";
 import {TeamSelector} from "./TeamSelector";
 import {Team} from "./data/team/Team";
@@ -14,16 +14,20 @@ import {Tournament} from "./data/Tournament";
 
 const driveKey = "1qJoXQP4ECRrhydxb76WmtPMQbjDDe4ccM-xtJZ3ZNPU";
 
-const TournamentContext: React.Context<Tournament> = React.createContext(undefined);
+const TournamentContext: React.Context<TournamentManager> = React.createContext(undefined);
 
-export const TournamentDataManager: FC = ({children}) => {
+export const TournamentDataManagerContext: FC = ({children}) => {
     const data = useTournamentData(driveKey);
 
-    return !data ? <>"Wait ...."</> : (
+    return !data.tournament ? <>"Wait ...."</> : (
         <TournamentContext.Provider value={data}>
             {children}
         </TournamentContext.Provider>
     );
 };
 
-export const useTournament: () => Tournament = () => useContext(TournamentContext) || {} as Tournament;
+export const useTournament: () => [Tournament, () => void] = () => {
+    const manager = useContext(TournamentContext);
+
+    return [manager.tournament, manager.refresh]
+}
