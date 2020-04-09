@@ -10,7 +10,7 @@ import {TournamentView} from "./TournamentView";
 import {filterPlayed, filterPlayingTeam, sortByDateRev} from "../data/game/GameUtils";
 import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
-import {useCurrentTeam} from "../CurrentTeamContext";
+import {useCurrentTeam} from "../login/CurrentTeamContext";
 import {GameIssue, getResult, getWinner} from "../data/stats/StatsUtils";
 import {Game} from "../data/game/Game";
 

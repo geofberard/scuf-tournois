@@ -11,7 +11,7 @@ import {TournamentView} from "./TournamentView";
 import {filterConcernedTeam, filterNotPlayed, sortByDate} from "../data/game/GameUtils";
 import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
-import {useCurrentTeam} from "../CurrentTeamContext";
+import {useCurrentTeam} from "../login/CurrentTeamContext";
 import {now} from "../DateUtils";
 import {Game} from "../data/game/Game";
 

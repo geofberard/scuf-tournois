@@ -28,25 +28,25 @@ export const RulesView = () => {
 
     return (
         <Container maxWidth="sm">
-        <Card>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt="VolleyBall"
-                    height="140"
-                    image="/img/volleyball.jpg"
-                    title=""
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Règles du tournois
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {tournament.rules.map(parseRule)}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+            <Card>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt="VolleyBall"
+                        height="140"
+                        image="/img/volleyball.jpg"
+                        title=""
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Règles du tournois
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {tournament.rules.map(parseRule)}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
         </Container>
     );
 }

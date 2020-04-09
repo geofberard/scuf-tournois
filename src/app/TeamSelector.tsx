@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import {sortByName} from "./data/team/TeamUtils";
 import {useTournament} from "./TournamentContext";
-import {useCurrentTeam} from "./CurrentTeamContext";
+import {useCurrentTeam} from "./login/CurrentTeamContext";
 
 export const TeamSelector = () => {
     const tournament = useTournament();
@@ -12,12 +12,12 @@ export const TeamSelector = () => {
 
     return (
         <FormControl variant="outlined">
-            <InputLabel htmlFor="outlined-age-native-simple">Équipe</InputLabel>
+            <InputLabel htmlFor="outlined-age-native-simple">Choisir une équipe</InputLabel>
             <Select
                 native
                 value={currentTeam ? currentTeam.id : ""}
                 onChange={(event) => setCurrentTeam(tournament.teams.find(team => team.id === event.target.value))}
-                label="Équipe"
+                label="Choisir une équipe"
             >
                 <option aria-label="None" value=""/>
                 {tournament.teams

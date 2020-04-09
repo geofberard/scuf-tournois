@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {FC, useContext, useEffect, useState} from 'react';
-import {Team} from "./data/team/Team";
-import {useTournament} from "./TournamentContext";
-import {parseElementId} from "./data/Utils";
+import {Team} from "../data/team/Team";
+import {useTournament} from "../TournamentContext";
+import {parseElementId} from "../data/Utils";
+import {CurrentTeamLogin} from "./CurrentTeamLogin";
 
 
 interface CurrentTeamManagerValue {
@@ -43,16 +44,13 @@ export const CurrentTeamManager: FC = ({children}) => {
     let setCurrentTeamAndPersist = (team) => {
         setCurrentTeam(team);
         setCookie(team, 10);
-        if(team === undefined) {
-            window.location.href = "/"
-        }
     };
 
     useEffect(() => setCurrentTeam(currentTeam || parseElementId(getTeamCookie(), tournament.teams)),[tournament]);
 
     return (
         <CurrentTeamContext.Provider value={{currentTeam, setCurrentTeam: setCurrentTeamAndPersist}}>
-            {children}
+            {!currentTeam ? <CurrentTeamLogin/> : children}
         </CurrentTeamContext.Provider>
     );
 };
@@ -61,4 +59,4 @@ export const useCurrentTeam: () => [Team, (team: Team) => void] = () => {
     const manager = useContext(CurrentTeamContext);
 
     return [manager.currentTeam, manager.setCurrentTeam]
-}
+};

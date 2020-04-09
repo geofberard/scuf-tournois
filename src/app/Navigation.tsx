@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Page} from "./data/navigation/Page";
-import {useCurrentTeam} from "./CurrentTeamContext";
+import {useCurrentTeam} from "./login/CurrentTeamContext";
 
 const drawerWidth = 240;
 
@@ -108,7 +108,6 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
 
     return (
         <div className={classes.root}>
-            <CssBaseline/>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <IconButton

@@ -11,7 +11,7 @@ import {sortByScore} from "../data/team/TeamUtils";
 import {TournamentView} from "./TournamentView";
 import {computeStats} from "../data/stats/StatsUtils";
 import {useTournament} from "../TournamentContext";
-import {useCurrentTeam} from "../CurrentTeamContext";
+import {useCurrentTeam} from "../login/CurrentTeamContext";
 import {useCellStyles} from "./TeamCell";
 
 const useStyles = makeStyles((theme) => ({
