@@ -11,8 +11,7 @@ import {ResultsView} from "./view/ResultsView";
 import {TournamentDataManager} from "./TournamentContext";
 import {CurrentTeamManager} from "./CurrentTeamContext";
 import {RulesView} from "./view/RulesView";
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import lightGreen from '@material-ui/core/colors/lightGreen';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
 

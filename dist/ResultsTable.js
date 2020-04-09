@@ -40,7 +40,7 @@ export var ResultsTable = function (_a) {
                     React.createElement(TableCell, { align: "right" }, "Diff."))),
             React.createElement(TableBody, null, teams
                 .sort(sortTeam)
-                .map(function (row, index) { return (React.createElement(TableRow, { key: row.id, className: focus && row === focus ? classes.focused : null },
+                .map(function (row, index) { return (React.createElement(TableRow, { key: row.id, className: focus && row === focus ? classes.focusedNeutral : null },
                 React.createElement(TableCell, { align: "right" }, index + 1),
                 React.createElement(TableCell, { component: "th", scope: "row" }, row.label),
                 React.createElement(TableCell, { align: "right" }, row.stats.score),

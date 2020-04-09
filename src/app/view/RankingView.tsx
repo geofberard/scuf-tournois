@@ -19,13 +19,6 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 650,
     },
 
-    focused: {
-        "& td": {
-            fontWeight: "bold",
-        },
-        backgroundColor: theme.palette.grey["100"],
-    },
-
     reduced: {
         width: 40,
         color: theme.palette.grey["600"],
@@ -63,7 +56,7 @@ export const RankingView: TournamentView = () => {
                         .sort(sortByScore)
                         .map((team, index) => (
                             <TableRow key={team.id}
-                                      className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
+                                      className={currentTeam && team.id === currentTeam.id ? cellClasses.focusedMain : null}>
                                 <TableCell className={cellClasses.narrow}>{index + 1}</TableCell>
                                 <TableCell>{team.label}</TableCell>
                                 <TableCell align="center">{team.score}</TableCell>

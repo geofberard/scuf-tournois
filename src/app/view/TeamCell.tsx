@@ -14,6 +14,25 @@ export const useCellStyles = makeStyles((theme) => ({
         }
     },
 
+    focusedMain: {
+        "& td": {
+            fontWeight: "bold",
+        },
+        backgroundColor: theme.palette.grey["100"],
+    },
+
+    focusedGood: {
+        backgroundColor: theme.palette.success["50"],
+    },
+
+    focusedBad: {
+        backgroundColor: theme.palette.error["50"],
+    },
+
+    focusedNeutral: {
+        backgroundColor: theme.palette.grey["50"],
+    },
+
     teamA: {
         fontWeight: "bold",
         textAlign: "right",

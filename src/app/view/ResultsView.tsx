@@ -1,14 +1,13 @@
 import * as React from 'react';
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
-import {filterPlayingTeam, sortByDate} from "../data/game/GameUtils";
+import {filterPlayed, filterPlayingTeam, sortByDateRev} from "../data/game/GameUtils";
 import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
@@ -27,14 +26,6 @@ const useStyles = makeStyles((theme) => ({
     looser: {
         color: theme.palette.grey["500"],
     },
-
-    teamWins: {
-        backgroundColor: theme.palette.success["50"],
-    },
-
-    teamLooses: {
-        backgroundColor: theme.palette.error["50"],
-    },
 }));
 
 export const ResultsView: TournamentView = () => {
@@ -49,11 +40,11 @@ export const ResultsView: TournamentView = () => {
     const getRawClassName = (game: Game) => {
         switch(getResult(currentTeam, game)) {
             case GameIssue.VICTORY:
-                return classes.teamWins;
+                return cellClasses.focusedGood;
             case GameIssue.DEFEAT:
-                return classes.teamLooses;
+                return cellClasses.focusedBad;
             default:
-                return ""
+                return cellClasses.focusedNeutral;
         }
     };
 
@@ -62,8 +53,9 @@ export const ResultsView: TournamentView = () => {
             <Table className={classes.table} stickyHeader size="small">
                 <TableBody>
                     {tournament.games
-                        .sort(sortByDate)
+                        .filter(filterPlayed)
                         .filter(filterPlayingTeam(currentTeam))
+                        .sort(sortByDateRev)
                         .map((game, index) => {
                             const winner = getWinner(game);
                             let extraClassA = winner === game.teamB ? classes.looser : "";

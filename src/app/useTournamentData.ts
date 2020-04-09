@@ -36,7 +36,7 @@ const loadGames = (driveKey: string, setGamesData: (data: Game[]) => void) => ({
                 let teamB = driveData.getValue(i, 3) as string;
                 gamesData.push({
                     id: "" + dateArray[0] + dateArray[1] + teamA + teamB,
-                    time: new Date(today.getFullYear(), today.getMonth(), today.getDate(), dateArray[0], dateArray[1]),
+                    time: new Date(today.getFullYear(), today.getMonth(), today.getDate(), dateArray[0], dateArray[1],0, 0),
                     court: driveData.getValue(i, 1) as string,
                     teamA: teamA,
                     teamB: teamB,

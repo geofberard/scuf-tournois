@@ -8,10 +8,12 @@ import TableBody from "@material-ui/core/TableBody";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
-import {filterConcernedTeam, sortByDate} from "../data/game/GameUtils";
+import {filterConcernedTeam, filterNotPlayed, sortByDate} from "../data/game/GameUtils";
 import {TeamCell, useCellStyles} from "./TeamCell";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
+import {now} from "../DateUtils";
+import {Game} from "../data/game/Game";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -25,6 +27,18 @@ export const ScheduleView: TournamentView = () => {
     const classes = useStyles();
     const cellClasses = useCellStyles();
 
+    const filteredGames = tournament.games
+        .filter(filterNotPlayed)
+        .filter(filterConcernedTeam(currentTeam))
+        .sort(sortByDate);
+
+    const nextTime = filteredGames.find(game => game.time > now()).time;
+    const getRowClassName = (game: Game) => {
+        return game.time.getTime() == nextTime.getTime()
+            ? cellClasses.focusedGood
+            : (game.time < nextTime ? cellClasses.focusedBad: "")
+    };
+
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader size="small">
@@ -37,11 +51,8 @@ export const ScheduleView: TournamentView = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tournament.games
-                        .sort(sortByDate)
-                        .filter(filterConcernedTeam(currentTeam))
-                        .map((game, index) => (
-                            <TableRow key={game.id}>
+                    {filteredGames.map((game, index) => (
+                            <TableRow key={game.id} className={getRowClassName(game)}>
                                 <TableCell>{game.time.toLocaleTimeString()}</TableCell>
                                 <TableCell>{game.court}</TableCell>
                                 <TeamCell teamId={game.teamA} className={cellClasses.teamA}/>

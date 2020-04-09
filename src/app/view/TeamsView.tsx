@@ -12,17 +12,11 @@ import {Container} from "@material-ui/core";
 import {TournamentView} from "./TournamentView";
 import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../CurrentTeamContext";
+import {useCellStyles} from "./TeamCell";
 
 const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 0,
-    },
-
-    focused: {
-        "& td": {
-            fontWeight: "bold",
-        },
-        backgroundColor: theme.palette.grey["100"],
     },
 }));
 
@@ -30,6 +24,7 @@ export const TeamsView: TournamentView = () => {
     const tournament = useTournament();
     const [currentTeam] = useCurrentTeam();
     const classes = useStyles();
+    const cellClasses = useCellStyles();
 
     return (
         <Container maxWidth="xs">
@@ -45,7 +40,7 @@ export const TeamsView: TournamentView = () => {
                             .sort(sortByName)
                             .map((team, index) => (
                                 <TableRow key={team.id}
-                                          className={currentTeam && team.id === currentTeam.id ? classes.focused : null}>
+                                          className={currentTeam && team.id === currentTeam.id ? cellClasses.focusedMain : null}>
                                     <TableCell align="center" scope="row">{team.label}</TableCell>
                                 </TableRow>
                             ))}
