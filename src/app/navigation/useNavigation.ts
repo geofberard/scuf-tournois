@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useState} from "react";
-import {Page} from "./data/navigation/Page";
+import {Page} from "../data/navigation/Page";
 import {createHashHistory, Location} from "history";
-import {parseElementId} from "./data/Utils";
+import {parseElementId} from "../data/Utils";
 
 export const useNavigation: (pages: Page[]) => [Page, (page: Page) => void] = (pages) => {
     const historyService = useMemo(() => createHashHistory({hashType: "noslash"}), []);

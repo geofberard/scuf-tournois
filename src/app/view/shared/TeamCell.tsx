@@ -1,8 +1,8 @@
 import TableCell from "@material-ui/core/TableCell";
-import {parseElementId} from "../data/Utils";
+import {parseElementId} from "../../data/Utils";
 import * as React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {useTournament} from "../TournamentContext";
+import {useTournament} from "../../loader/TournamentContext";
 
 export const useCellStyles = makeStyles((theme) => ({
     narrow: {

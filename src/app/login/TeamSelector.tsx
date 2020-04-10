@@ -2,9 +2,9 @@ import * as React from 'react';
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import {sortByName} from "./data/team/TeamUtils";
-import {useTournament} from "./TournamentContext";
-import {useCurrentTeam} from "./login/CurrentTeamContext";
+import {sortByName} from "../data/team/TeamUtils";
+import {useTournament} from "../loader/TournamentContext";
+import {useCurrentTeam} from "./CurrentTeamContext";
 
 export const TeamSelector = () => {
     const [tournament] = useTournament();

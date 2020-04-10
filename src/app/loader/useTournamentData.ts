@@ -1,8 +1,8 @@
 import {useState} from "react";
-import {Tournament} from "./data/Tournament";
-import {Team} from "./data/team/Team";
-import {Game} from "./data/game/Game";
-import {Rule} from "./data/rule/Rule";
+import {Tournament} from "../data/Tournament";
+import {Team} from "../data/team/Team";
+import {Game} from "../data/game/Game";
+import {Rule} from "../data/rule/Rule";
 
 export interface TournamentManager {
     tournament: Tournament;

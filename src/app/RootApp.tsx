@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {RankingView} from "./view/RankingView";
-import {Navigation} from "./Navigation";
+import {Navigation} from "./navigation/Navigation";
 import {LocationMap, Ranking, Results, Rules, Schedule, Teams} from "./data/navigation/Pages";
 import {TeamsView} from "./view/TeamsView";
 import {ScheduleView} from "./view/ScheduleView";
-import {useNavigation} from "./useNavigation";
+import {useNavigation} from "./navigation/useNavigation";
 import {ResultsView} from "./view/ResultsView";
-import {TournamentDataManagerContext} from "./TournamentContext";
+import {TournamentDataManagerContext} from "./loader/TournamentContext";
 import {CurrentTeamManagerContext} from "./login/CurrentTeamContext";
 import {RulesView} from "./view/RulesView";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';

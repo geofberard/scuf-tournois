@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import {Container} from "@material-ui/core";
-import {useTournament} from "../TournamentContext";
+import {useTournament} from "../loader/TournamentContext";
 import {Rule} from "../data/rule/Rule";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 

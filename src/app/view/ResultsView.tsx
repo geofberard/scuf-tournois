@@ -8,12 +8,12 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Paper from "@material-ui/core/Paper";
 import {TournamentView} from "./TournamentView";
 import {filterPlayed, filterPlayingTeam, sortByDateRev} from "../data/game/GameUtils";
-import {TeamCell, useCellStyles} from "./TeamCell";
-import {useTournament} from "../TournamentContext";
+import {TeamCell, useCellStyles} from "./shared/TeamCell";
+import {useTournament} from "../loader/TournamentContext";
 import {useCurrentTeam} from "../login/CurrentTeamContext";
 import {GameIssue, getResult, getWinner} from "../data/stats/StatsUtils";
 import {Game} from "../data/game/Game";
-import {MessageCard} from "./MessageCard";
+import {MessageCard} from "./shared/MessageCard";
 
 const useStyles = makeStyles((theme) => ({
     table: {

@@ -10,9 +10,9 @@ import Paper from "@material-ui/core/Paper";
 import {sortByName} from "../data/team/TeamUtils";
 import {Container} from "@material-ui/core";
 import {TournamentView} from "./TournamentView";
-import {useTournament} from "../TournamentContext";
+import {useTournament} from "../loader/TournamentContext";
 import {useCurrentTeam} from "../login/CurrentTeamContext";
-import {useCellStyles} from "./TeamCell";
+import {useCellStyles} from "./shared/TeamCell";
 
 const useStyles = makeStyles((theme) => ({
     table: {

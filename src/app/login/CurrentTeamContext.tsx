@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useContext, useEffect, useState} from 'react';
 import {Team} from "../data/team/Team";
-import {useTournament} from "../TournamentContext";
+import {useTournament} from "../loader/TournamentContext";
 import {parseElementId} from "../data/Utils";
 import {CurrentTeamLogin} from "./CurrentTeamLogin";
 import {getTeamCookie, setCookie} from "./TeamCookieUtils";

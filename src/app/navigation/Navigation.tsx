@@ -14,10 +14,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {Page} from "./data/navigation/Page";
-import {useCurrentTeam} from "./login/CurrentTeamContext";
+import {Page} from "../data/navigation/Page";
+import {useCurrentTeam} from "../login/CurrentTeamContext";
 import RefreshIcon from '@material-ui/icons/Refresh';
-import {useTournament} from "./TournamentContext";
+import {useTournament} from "../loader/TournamentContext";
 
 const drawerWidth = 240;
 

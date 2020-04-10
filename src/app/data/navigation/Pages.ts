@@ -8,8 +8,6 @@ import SportsIcon from '@material-ui/icons/Sports';
 
 // Icons
 // import SportsVolleyballIcon from '@material-ui/icons/SportsVolleyball';
-// import DateRangeIcon from '@material-ui/icons/DateRange';
-// import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 export const Ranking: Page = {
     id: "Ranking",
