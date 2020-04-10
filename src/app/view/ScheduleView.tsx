@@ -36,9 +36,9 @@ export const ScheduleView: TournamentView = () => {
     const nextGame = filteredGames.find(game => game.time > now());
 
     const getRowClassName = (game: Game) => {
-        return game.time.getTime() == nextGame.time.getTime()
+        return (nextGame && game.time.getTime() == nextGame.time.getTime())
             ? cellClasses.focusedGood
-            : (game.time.getTime() < nextGame.time.getTime() ? cellClasses.focusedBad: "")
+            : (!nextGame || (game.time.getTime() < nextGame.time.getTime()) ? cellClasses.focusedBad: "")
     };
 
     return filteredGames.length === 0 ? <MessageCard label="Plus de matche planifié !"/> : (
