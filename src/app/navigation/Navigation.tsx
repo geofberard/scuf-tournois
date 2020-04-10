@@ -10,14 +10,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {createStyles, makeStyles, Theme, useTheme} from '@material-ui/core/styles';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Page} from "../data/navigation/Page";
 import {useCurrentTeam} from "../login/CurrentTeamContext";
-import RefreshIcon from '@material-ui/icons/Refresh';
 import {useTournament} from "../loader/TournamentContext";
+import {useAdmin} from "../admin/AdminManagerContext";
+import {TeamSelector} from "../login/TeamSelector";
 
 const drawerWidth = 240;
 
@@ -62,6 +65,9 @@ const useStyles = makeStyles((theme: Theme) =>
         logo: {
             height: 55,
             marginRight: 15,
+        },
+        drawerSelect: {
+            paddingTop: 15,
         }
     }),
 );
@@ -76,6 +82,7 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
     const [currentTeam, setCurrentTeam] = useCurrentTeam();
     const [, refresh ] = useTournament();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const isAdmin = useAdmin();
 
     const classes = useStyles();
     const theme = useTheme();
@@ -86,7 +93,11 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
 
     const drawer = (
         <div>
-            <div className={classes.toolbar}/>
+            {!isAdmin ? <div className={classes.toolbar}/> : (
+                <ListItem className={classes.drawerSelect}>
+                    <TeamSelector/>
+                </ListItem>
+            )}
             <Divider/>
             <List>
                 {pages.map((page, index) => (
@@ -103,11 +114,24 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
                     </ListItem>
                 ))}
             </List>
-            <Divider/>
-            <ListItem button>
-                <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-                <ListItemText primary={"Quitter"} onClick={() => setCurrentTeam(undefined)}/>
-            </ListItem>
+            {!isAdmin && (
+                <>
+                    <Divider/>
+                    <ListItem button>
+                        <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+                        <ListItemText primary={"Quitter"} onClick={() => setCurrentTeam(undefined)}/>
+                    </ListItem>
+                </>
+            )}
+            {isAdmin && currentTeam && (
+                <>
+                    <Divider/>
+                    <ListItem button>
+                        <ListItemIcon><VisibilityIcon/></ListItemIcon>
+                        <ListItemText primary={"Tout voir"} onClick={() => setCurrentTeam(undefined)}/>
+                    </ListItem>
+                </>
+            )}
         </div>
     );
 
@@ -128,12 +152,10 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
                     <Typography variant="h5" noWrap className={classes.title}>
                         Tournois
                     </Typography>
-                    {currentTeam && (
-                        <>
-                            <Typography variant="h6">
-                                {currentTeam.label}
-                            </Typography>
-                        </>
+                    {currentTeam && !isAdmin && (
+                        <Typography variant="h6">
+                            {currentTeam.label}
+                        </Typography>
                     )}
                     <IconButton aria-label="show 4 new mails"
                                 color="inherit"

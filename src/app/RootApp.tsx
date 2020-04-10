@@ -14,6 +14,7 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import {AdminManagerContext} from "./admin/AdminManagerContext";
 
 const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap];
 
@@ -30,17 +31,19 @@ export const RootApp: FC = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <TournamentDataManagerContext>
-                <CurrentTeamManagerContext>
-                    <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>
-                        {(currentPage === Ranking) && <RankingView/>}
-                        {(currentPage === Schedule) && <ScheduleView/>}
-                        {(currentPage === Results) && <ResultsView/>}
-                        {(currentPage === Teams) && <TeamsView/>}
-                        {(currentPage === Rules) && <RulesView/>}
-                    </Navigation>
-                </CurrentTeamManagerContext>
-            </TournamentDataManagerContext>
+            <AdminManagerContext>
+                <TournamentDataManagerContext>
+                    <CurrentTeamManagerContext>
+                        <Navigation pages={ALL_PAGES} currentPage={currentPage} onChange={setCurrentPage}>
+                            {(currentPage === Ranking) && <RankingView/>}
+                            {(currentPage === Schedule) && <ScheduleView/>}
+                            {(currentPage === Results) && <ResultsView/>}
+                            {(currentPage === Teams) && <TeamsView/>}
+                            {(currentPage === Rules) && <RulesView/>}
+                        </Navigation>
+                    </CurrentTeamManagerContext>
+                </TournamentDataManagerContext>
+            </AdminManagerContext>
         </ThemeProvider>
     );
 };

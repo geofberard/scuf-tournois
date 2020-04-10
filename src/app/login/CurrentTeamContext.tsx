@@ -5,6 +5,7 @@ import {useTournament} from "../loader/TournamentContext";
 import {parseElementId} from "../data/Utils";
 import {CurrentTeamLogin} from "./CurrentTeamLogin";
 import {getTeamCookie, setCookie} from "./TeamCookieUtils";
+import {useAdmin} from "../admin/AdminManagerContext";
 
 interface CurrentTeamManager {
     currentTeam: Team;
@@ -16,6 +17,7 @@ const CurrentTeamContext: React.Context<CurrentTeamManager> = React.createContex
 export const CurrentTeamManagerContext: FC = ({children}) => {
     const [currentTeam, setCurrentTeam] = useState<Team>();
     const [tournament] = useTournament();
+    const isAdmin = useAdmin();
 
     let setCurrentTeamAndPersist = (team) => {
         setCurrentTeam(team);
@@ -26,7 +28,7 @@ export const CurrentTeamManagerContext: FC = ({children}) => {
 
     return (
         <CurrentTeamContext.Provider value={{currentTeam, setCurrentTeam: setCurrentTeamAndPersist}}>
-            {!currentTeam ? <CurrentTeamLogin/> : children}
+            {!currentTeam && !isAdmin ? <CurrentTeamLogin/> : children}
         </CurrentTeamContext.Provider>
     );
 };
