@@ -21,25 +21,21 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export const CurrentTeamLogin: FC = () => {
+interface MessageCardProps {
+    label: string,
+}
+
+export const MessageCard: FC<MessageCardProps> = ({label}) => {
     const classes = useStyles();
 
     return (
         <Container maxWidth="xs">
             <Card className={classes.card}>
                 <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        alt="VolleyBall"
-                        height="140"
-                        image="/img/volleyball.jpg"
-                        title=""
-                    />
                     <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h6" component="h2">
-                            Bienvenue au tournois du SCUF !
+                            {label}
                         </Typography>
-                        <TeamSelector/>
                     </CardContent>
                 </CardActionArea>
             </Card>

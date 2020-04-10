@@ -13,6 +13,7 @@ import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../login/CurrentTeamContext";
 import {GameIssue, getResult, getWinner} from "../data/stats/StatsUtils";
 import {Game} from "../data/game/Game";
+import {MessageCard} from "./MessageCard";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -48,14 +49,16 @@ export const ResultsView: TournamentView = () => {
         }
     };
 
-    return (
+    const filteredGames = tournament.games
+        .filter(filterPlayed)
+        .filter(filterPlayingTeam(currentTeam))
+        .sort(sortByDateRev);
+
+    return filteredGames.length === 0 ? <MessageCard label="Aucun résultat disponible !"/> : (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader size="small">
                 <TableBody>
-                    {tournament.games
-                        .filter(filterPlayed)
-                        .filter(filterPlayingTeam(currentTeam))
-                        .sort(sortByDateRev)
+                    {filteredGames
                         .map((game, index) => {
                             const winner = getWinner(game);
                             let extraClassA = winner === game.teamB ? classes.looser : "";

@@ -14,6 +14,7 @@ import {useTournament} from "../TournamentContext";
 import {useCurrentTeam} from "../login/CurrentTeamContext";
 import {now} from "../DateUtils";
 import {Game} from "../data/game/Game";
+import {MessageCard} from "./MessageCard";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -32,14 +33,15 @@ export const ScheduleView: TournamentView = () => {
         .filter(filterConcernedTeam(currentTeam))
         .sort(sortByDate);
 
-    const nextTime = filteredGames.find(game => game.time > now()).time;
+    const nextGame = filteredGames.find(game => game.time > now());
+
     const getRowClassName = (game: Game) => {
-        return game.time.getTime() == nextTime.getTime()
+        return game.time.getTime() == nextGame.time.getTime()
             ? cellClasses.focusedGood
-            : (game.time < nextTime ? cellClasses.focusedBad: "")
+            : (game.time.getTime() < nextGame.time.getTime() ? cellClasses.focusedBad: "")
     };
 
-    return (
+    return filteredGames.length === 0 ? <MessageCard label="Plus de matche planifié !"/> : (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader size="small">
                 <TableHead>
