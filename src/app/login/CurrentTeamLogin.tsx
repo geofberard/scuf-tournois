@@ -12,7 +12,7 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
-            marginTop: 30,
+            marginTop: 80,
         },
 
         cardContent: {
@@ -25,14 +25,14 @@ export const CurrentTeamLogin: FC = () => {
     const classes = useStyles();
 
     return (
-        <Container maxWidth="xs">
+        <Container maxWidth="sm">
             <Card className={classes.card}>
                 <CardActionArea>
                     <CardMedia
                         component="img"
                         alt="VolleyBall"
                         height="140"
-                        image="/img/volleyball.jpg"
+                        image="/img/login.jpg"
                         title=""
                     />
                     <CardContent className={classes.cardContent}>

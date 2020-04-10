@@ -59,6 +59,10 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             flexGrow: 1,
         },
+        logo: {
+            height: 55,
+            marginRight: 15,
+        }
     }),
 );
 
@@ -120,8 +124,9 @@ export const Navigation: FC<NavigationProps> = ({pages, currentPage,onChange,chi
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" noWrap className={classes.title}>
-                        Tournois SCUF
+                    <img className={classes.logo} src="/img/scuf-logo.png"/>
+                    <Typography variant="h5" noWrap className={classes.title}>
+                        Tournois
                     </Typography>
                     {currentTeam && (
                         <>

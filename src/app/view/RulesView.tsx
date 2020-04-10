@@ -34,7 +34,7 @@ export const RulesView = () => {
                         component="img"
                         alt="VolleyBall"
                         height="140"
-                        image="/img/volleyball.jpg"
+                        image="/img/rules.jpg"
                         title=""
                     />
                     <CardContent>
