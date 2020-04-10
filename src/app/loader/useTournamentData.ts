@@ -74,7 +74,7 @@ const loadRules = (driveKey: string, setGamesData: (data: Rule[]) => void) => ({
 
 let flag = true;
 
-export const useTournamentData: (driveKey: string) => TournamentManager = (driveKey) => {
+export const useTournamentData: (driveKey: string, isAdmin: boolean) => TournamentManager = (driveKey, isAdmin) => {
     const [teams, setTeams] = useState<Team[]>();
     const [games, setGames] = useState<Game[]>();
     const [rules, setRules] = useState<Rule[]>();
@@ -93,6 +93,10 @@ export const useTournamentData: (driveKey: string) => TournamentManager = (drive
             teamsDataLoaderTemp.load();
             gamesDataLoaderTemp.load();
             ruleDataLoaderTemp.load();
+
+            if(isAdmin) {
+                setInterval(gamesDataLoaderTemp.load, 5000);
+            }
         });
 
         flag = false;
