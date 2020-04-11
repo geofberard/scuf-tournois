@@ -15,6 +15,7 @@ import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {AdminManagerContext} from "./admin/AdminManagerContext";
+import {LocationMapView} from "./view/LocationMapView";
 
 const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap];
 
@@ -40,6 +41,7 @@ export const RootApp: FC = () => {
                             {(currentPage === Results) && <ResultsView/>}
                             {(currentPage === Teams) && <TeamsView/>}
                             {(currentPage === Rules) && <RulesView/>}
+                            {(currentPage === LocationMap) && <LocationMapView/>}
                         </Navigation>
                     </CurrentTeamManagerContext>
                 </TournamentDataManagerContext>
