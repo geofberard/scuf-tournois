@@ -41,7 +41,7 @@ export const ScheduleView: TournamentView = () => {
             : (!nextGame || (game.time.getTime() < nextGame.time.getTime()) ? cellClasses.focusedBad: "")
     };
 
-    return filteredGames.length === 0 ? <MessageCard label="Plus de matche planifié !"/> : (
+    return filteredGames.length === 0 ? <MessageCard label="Plus de match planifié !"/> : (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader size="small">
                 <TableHead>
