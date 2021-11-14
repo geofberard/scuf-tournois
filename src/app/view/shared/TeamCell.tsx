@@ -66,7 +66,7 @@ export const TeamCell = ({ teamId, className = "" }: TeamCellProps) => {
       scope="row"
       className={`${classes.tableCell} ${className}`}
     >
-      {parseElementId(teamId, tournament.teams).label}
+      {teamId === "-" ? "-" : parseElementId(teamId, tournament.teams).label}
     </TableCell>
   );
 };

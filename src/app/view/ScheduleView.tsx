@@ -33,7 +33,10 @@ export const ScheduleView: TournamentView = () => {
     .filter(filterConcernedTeam(currentTeam))
     .sort(sortByDate);
 
-  const nextGame = filteredGames.find(game => game.time > now());
+  const nextGame = filteredGames.find(game => {
+    console.log(game.time);
+    return game.time > now();
+  });
 
   const getRowClassName = (game: Game) => {
     if (nextGame && game.time.getTime() === nextGame.time.getTime()) {
