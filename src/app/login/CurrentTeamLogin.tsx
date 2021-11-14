@@ -31,7 +31,7 @@ export const CurrentTeamLogin: FC = () => {
             component="img"
             alt="VolleyBall"
             height="140"
-            image="/img/login.jpg"
+            image="img/login.jpg"
             title=""
           />
           <CardContent className={classes.cardContent}>

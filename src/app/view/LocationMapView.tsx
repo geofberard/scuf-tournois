@@ -16,7 +16,7 @@ export const LocationMapView = () => (
       <CardMedia
         component="img"
         alt="VolleyBall"
-        image="/img/map.jpg"
+        image="img/map.jpg"
         title=""
       />
     </CardActionArea>

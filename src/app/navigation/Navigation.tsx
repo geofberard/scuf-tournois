@@ -154,7 +154,7 @@ export const Navigation: FC<NavigationProps> = ({
           >
             <MenuIcon />
           </IconButton>
-          <img className={classes.logo} src="/img/scuf-logo.png" alt="SCUF" />
+          <img className={classes.logo} src="img/scuf-logo.png" alt="SCUF" />
           <Typography variant="h5" noWrap className={classes.title}>
             Tournois
           </Typography>
