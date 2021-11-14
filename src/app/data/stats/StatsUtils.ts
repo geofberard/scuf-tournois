@@ -3,7 +3,7 @@ import { Team } from "../team/Team";
 import { Game } from "../game/Game";
 
 export enum GameIssue {
-  VICTORY = 3, DEFEAT = 1, DRAWN = 0
+  VICTORY = 3, DEFEAT = 1, DRAWN = 0, NOT_PLAYED = 4
 }
 
 const initialStats: Stats = {
@@ -25,6 +25,10 @@ export const getWinner = (game: Game) => {
 };
 
 export const getResult = (team: Team, game: Game) => {
+  if (!game.scoreA || !game.scoreB) {
+    return GameIssue.NOT_PLAYED;
+  }
+
   const winner = getWinner(game);
 
   if (!winner) {
