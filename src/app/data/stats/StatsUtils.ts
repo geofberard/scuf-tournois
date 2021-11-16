@@ -38,6 +38,17 @@ export const getResult = (team: Team, game: Game) => {
   return winner === team.id ? GameIssue.VICTORY : GameIssue.DEFEAT;
 };
 
+const getPoints = (issue: GameIssue) => {
+  switch (issue) {
+    case GameIssue.VICTORY:
+      return 3;
+    case GameIssue.DRAWN:
+      return 1;
+    default:
+      return 0;
+  }
+};
+
 export const computeStats: (team: Team, games: Game[]) => Stats = (team, games) =>
   games
     .filter(game => game.teamA === team.id || game.teamB === team.id)
@@ -50,7 +61,7 @@ export const computeStats: (team: Team, games: Game[]) => Stats = (team, games) 
         won: stats.won + (issue === GameIssue.VICTORY ? 1 : 0),
         drawn: stats.drawn + (issue === GameIssue.DRAWN ? 1 : 0),
         lost: stats.lost + (issue === GameIssue.DEFEAT ? 1 : 0),
-        score: stats.score + issue,
+        score: stats.score + getPoints(issue),
         pointsFor: stats.pointsFor + pointsFor,
         pointsAgainst: stats.pointsAgainst + pointsAgainst,
         pointsDiff: stats.pointsDiff + pointsFor - pointsAgainst,
