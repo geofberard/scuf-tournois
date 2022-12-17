@@ -4,6 +4,7 @@ import ViewListIcon from "@material-ui/icons/ViewList";
 import GroupIcon from "@material-ui/icons/Group";
 import MapIcon from "@material-ui/icons/Map";
 import SportsIcon from "@material-ui/icons/Sports";
+import CropFreeIcon from "@material-ui/icons/CropFree";
 import { Page } from "./Page";
 
 // Icons
@@ -43,4 +44,10 @@ export const LocationMap: Page = {
   id: "LocationMap",
   label: "Plan",
   Icon: MapIcon,
+};
+
+export const QrCode: Page = {
+  id: "QrCode",
+  label: "QR Code",
+  Icon: CropFreeIcon,
 };

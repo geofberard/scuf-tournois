@@ -7,7 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { RankingView } from "./view/RankingView";
 import { Navigation } from "./navigation/Navigation";
 import {
-  LocationMap, Ranking, Results, Rules, Schedule, Teams,
+  LocationMap, QrCode, Ranking, Results, Rules, Schedule, Teams,
 } from "./data/navigation/Pages";
 import { TeamsView } from "./view/TeamsView";
 import { ScheduleView } from "./view/ScheduleView";
@@ -18,8 +18,9 @@ import { CurrentTeamManagerContext } from "./login/CurrentTeamContext";
 import { RulesView } from "./view/RulesView";
 import { AdminManagerContext } from "./admin/AdminManagerContext";
 import { LocationMapView } from "./view/LocationMapView";
+import { QrCodeView } from "./view/QrCodeView";
 
-const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap];
+const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap, QrCode];
 
 const theme = createMuiTheme({
   palette: {
@@ -44,6 +45,7 @@ export const RootApp: FC = () => {
               {(currentPage === Teams) && <TeamsView />}
               {(currentPage === Rules) && <RulesView />}
               {(currentPage === LocationMap) && <LocationMapView />}
+              {(currentPage === QrCode) && <QrCodeView />}
             </Navigation>
           </CurrentTeamManagerContext>
         </TournamentDataManagerContext>
