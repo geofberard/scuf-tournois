@@ -56,7 +56,7 @@ export const ScheduleView: TournamentView = () => {
         <TableBody>
           {filteredGames.map(game => (
             <TableRow key={game.id} className={getRowClassName(game)}>
-              <TableCell>{game.time.toLocaleTimeString()}</TableCell>
+              <TableCell>{game.time.toLocaleTimeString("fr", { hour: "2-digit", minute: "2-digit" })}</TableCell>
               <TableCell>{game.court}</TableCell>
               <TeamCell teamId={game.teamA} className={cellClasses.teamA} />
               <TableCell className={cellClasses.narrow}>-</TableCell>
