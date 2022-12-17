@@ -24,6 +24,9 @@ const ALL_PAGES = [Ranking, Schedule, Results, Rules, Teams, LocationMap, QrCode
 
 const theme = createMuiTheme({
   palette: {
+    primary: {
+      main: "#000",
+    },
     error: red,
     success: green,
   },
